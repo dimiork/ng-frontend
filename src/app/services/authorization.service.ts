@@ -33,7 +33,7 @@ export class AuthorizationService {
       this.user = new ReplaySubject<User>(null);
 
       this.fetchUser()
-        .subscribe((result) => {
+        .subscribe((result: User) => {
           this.user.next(result);
         });
     }
@@ -54,7 +54,7 @@ export class AuthorizationService {
         return throwError(error);
       })
     );
-  } 
+  }
 
   public register(credentials: Credentials): Observable<AuthorizationResponse> {
 
@@ -97,6 +97,5 @@ export class AuthorizationService {
 
     localStorage.removeItem('token');
   }
-
 
 }
