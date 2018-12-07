@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+<<<<<<< HEAD
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+=======
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+>>>>>>> release v1.0
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +23,11 @@ import { MainPageComponent } from './components/main-page/main-page.component';
   ],
   imports: [
     BrowserModule,
+<<<<<<< HEAD
     HttpClientModule,
+=======
+    BrowserAnimationsModule,
+>>>>>>> release v1.0
     MaterialModule,
     AppRoutingModule
   ],
