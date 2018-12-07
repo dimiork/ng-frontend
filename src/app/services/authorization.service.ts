@@ -3,14 +3,14 @@ import { HttpClient, HttpRequest, HttpResponse, HttpErrorResponse } from '@angul
 import { RequestOptions } from '@angular/http';
 
 import { Observable, BehaviorSubject, ReplaySubject, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { User, Credentials, AuthorizationResponse } from '../models/';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthorizationService {
 
   // private user: BehaviorSubject<User>;
   private authorized: BehaviorSubject<boolean>;
@@ -44,7 +44,7 @@ export class AuthenticationService {
   public login(credentials: Credentials): Observable<void> {
 
     return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/login', credentials).pipe(
-      map((response: AuthorizationResponse) => {
+      tap((response: AuthorizationResponse) => {
         if (response.success === true) {
           this.saveToken(response.token);
           this.authorized.next(true);
@@ -59,7 +59,7 @@ export class AuthenticationService {
   public register(credentials: Credentials): Observable<void> {
 
     return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/auth', credentials).pipe(
-      map((response: AuthorizationResponse) => {
+      tap((response: AuthorizationResponse) => {
         if (response.success === true) {
           this.saveToken(response.token);
           this.authorized.next(true);
