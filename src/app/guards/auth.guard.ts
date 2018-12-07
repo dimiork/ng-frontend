@@ -46,8 +46,8 @@ export class AuthGuard implements CanActivate {
 		) {
 
 		this.authService.getCurrentUser() // Check whether this function name matches the one in the authService
-		  .subscribe(user => {
-		  	if (!!user) {
+		  .subscribe(client => {
+		  	if (!!client) {
 		  		this.router.navigate(['home']);
 		  		this.hasAcces = true;
 
