@@ -1,5 +1,5 @@
 
-export interface AuthorizationResponse {
+export class AuthorizationResponse {
   success: boolean;
   iat: number;
   exp: number;

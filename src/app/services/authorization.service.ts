@@ -5,6 +5,7 @@ import { RequestOptions } from '@angular/http';
 import { Observable, BehaviorSubject, ReplaySubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
 import { User, Credentials, AuthorizationResponse } from '../models/';
 
 @Injectable({
@@ -12,13 +13,11 @@ import { User, Credentials, AuthorizationResponse } from '../models/';
 })
 export class AuthorizationService {
 
-  // private user: BehaviorSubject<User>;
+  private user: BehaviorSubject<User | null>;
   private authorized: BehaviorSubject<boolean>;
-  private user: ReplaySubject<User>;
 
   constructor(private http: HttpClient) {
 
-    // this.user = new BehaviorSubject<User>(null);
     this.authorized = new BehaviorSubject<boolean>(false);
   }
 
@@ -27,15 +26,23 @@ export class AuthorizationService {
     return this.authorized.asObservable();
   }
 
+  private authResponseHandler(response: AuthorizationResponse): void {
+    if (response.success === true) {
+      this.saveToken(response.token);
+      this.authorized.next(true);
+    }
+  }
+
   public getUser(): Observable<User> {
 
     if (!this.user) {
-      this.user = new ReplaySubject<User>(null);
+      this.user = new BehaviorSubject<User>(null);
 
-      this.fetchUser()
-        .subscribe((result: User) => {
-          this.user.next(result);
-        });
+      return this.fetchUser().pipe(
+          tap((result: User) => {
+            this.user.next(result);
+          })
+        )
     }
 
     return this.user.asObservable();
@@ -43,12 +50,9 @@ export class AuthorizationService {
 
   public login(credentials: Credentials): Observable<AuthorizationResponse> {
 
-    return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/login', credentials).pipe(
+    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/login`, credentials).pipe(
       tap((response: AuthorizationResponse) => {
-        if (response.success === true) {
-          this.saveToken(response.token);
-          this.authorized.next(true);
-        }
+        this.authResponseHandler(response);
       }),
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
@@ -58,12 +62,9 @@ export class AuthorizationService {
 
   public register(credentials: Credentials): Observable<AuthorizationResponse> {
 
-    return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/auth', credentials).pipe(
+    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/auth`, credentials).pipe(
       tap((response: AuthorizationResponse) => {
-        if (response.success === true) {
-          this.saveToken(response.token);
-          this.authorized.next(true);
-        }
+        this.authResponseHandler(response);
       }),
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
@@ -73,7 +74,7 @@ export class AuthorizationService {
 
   public fetchUser (): Observable<User> {
 
-    return this.http.get<User>('https://incode-store.herokuapp.com/user');
+    return this.http.get<User>(`${ environment.api_url }/user`);
   }
 
   public logout (): void {
