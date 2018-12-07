@@ -19,7 +19,7 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [
+export const routingComponents: Array<any> = [
   LoginComponent,
   RegisterComponent,
   HomeComponent
