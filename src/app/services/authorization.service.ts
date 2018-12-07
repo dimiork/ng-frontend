@@ -42,7 +42,7 @@ export class AuthorizationService {
           tap((result: User) => {
             this.user.next(result);
           })
-        )
+        );
     }
 
     return this.user.asObservable();

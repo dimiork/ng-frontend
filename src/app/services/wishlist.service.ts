@@ -10,7 +10,6 @@ import { environment } from '../../environments/environment';
 })
 export class WishlistService {
 
-
   private wishlistUrl: string = `${environment.api_url}/wishlists`;
 
   constructor(private http: HttpClient) { }
