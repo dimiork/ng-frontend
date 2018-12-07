@@ -25,8 +25,8 @@ export class LoginComponent {
 
   loginUser(): void {
     if (Object.values(this.loginUserData).length) {
-      this.authService.route = 'login'; // Check var
-      this.authService.sendUserData(this.loginUserData) // Check meth
+      this.authService.route = 'login';
+      this.authService.login(this.loginUserData)
       .subscribe(
         (result: any) => {
           this.router.navigate(['home']);
