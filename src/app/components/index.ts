@@ -1,1 +1,0 @@
-export { AComponent } from './a/a.component';

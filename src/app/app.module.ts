@@ -8,21 +8,16 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
-import { AComponent } from './components/a/a.component';
-import { BComponent } from './components/b/b.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AComponent,
-    BComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HttpModule,
     MaterialModule,
-
     AppRoutingModule
   ],
   providers: [
