@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
+import { Credentials } from '../models/credentials'
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
 
-  private loginUserData: any = {};
+  private loginUserData: Credentials;
 
   constructor(
     private authService: AuthService,
