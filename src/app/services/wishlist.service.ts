@@ -9,10 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class WishlistService {
 
-  @Input(environment.srcService) srcService;
+  api_url;
 
-
-  private wishlistUrl = `${this.srcService}/wishlists`;
+  private wishlistUrl = `${this.api_url}/wishlists`;
 
   constructor(private http: HttpClient) { }
 

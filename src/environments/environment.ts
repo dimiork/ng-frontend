@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  srcService: "https://incode-store.herokuapp.com"
+  api_url: "https://incode-store.herokuapp.com"
 };
 
 /*
