@@ -4,33 +4,33 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-
-
-
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class ErrorInterceptor implements HttpInterceptor {
 
-	constructor() {}
+  constructor() {
+    //
+  }
 
-	intercept(
-		request: HttpRequest<any>,
-		next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler): Observable<HttpEvent<any>> {
 
-		return next.handle(request)
-				.pipe(
-					catchError(
-						error => {
-							if (error.status === 401) {
-								location.reload(true);
-							}
-							
-							const errToThrow = error.error.message || error.statusText;
-							return 	throwError(errToThrow);
-						})
-					);
-	}
+    return next.handle(request)
+      .pipe(
+        catchError(
+          (error: any) => {
+            if (error.status === 401) {
+              location.reload(true);
+            }
+
+            const errToThrow: string = error.error.message || error.statusText;
+
+            return throwError(errToThrow);
+          })
+      );
+  }
 
 }
