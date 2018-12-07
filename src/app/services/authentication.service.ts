@@ -5,7 +5,7 @@ import { RequestOptions } from '@angular/http';
 import { Observable, BehaviorSubject, ReplaySubject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { User, Credentials, AuthResponse } from '../models/';
+import { User, Credentials, AuthorizationResponse } from '../models/';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   // private user: BehaviorSubject<User>;
   private authorized: BehaviorSubject<boolean>;
-  private cachingUser: ReplaySubject<User>;
+  private user: ReplaySubject<User>;
 
   constructor(private http: HttpClient) {
 
@@ -29,44 +29,44 @@ export class AuthenticationService {
 
   public getUser(): Observable<User> {
 
-    if (!this.cachingUser) {
-      this.cachingUser = new ReplaySubject<User>(null);
+    if (!this.user) {
+      this.user = new ReplaySubject<User>(null);
 
       this.fetchUser()
         .subscribe((result) => {
-          this.cachingUser.next(result);
+          this.user.next(result);
         });
     }
 
-    return this.cachingUser.asObservable();
+    return this.user.asObservable();
   }
 
-  public login(credentials: Credentials): Observable<AuthResponse> {
+  public login(credentials: Credentials): Observable<void> {
 
-    return this.http.post<AuthResponse>('https://incode-store.herokuapp.com/login', credentials).pipe(
-      map((response: AuthResponse) => {
+    return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/login', credentials).pipe(
+      map((response: AuthorizationResponse) => {
         if (response.success === true) {
           this.saveToken(response.token);
           this.authorized.next(true);
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        return Observable.throwError(error);
+        return throwError(error);
       })
     );
   }
 
-  public register(credentials: Credentials): Observable<AuthResponse> {
+  public register(credentials: Credentials): Observable<void> {
 
-    return this.http.post<AuthResponse>('https://incode-store.herokuapp.com/auth', credentials).pipe(
-      map((response: AuthResponse) => {
+    return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/auth', credentials).pipe(
+      map((response: AuthorizationResponse) => {
         if (response.success === true) {
           this.saveToken(response.token);
           this.authorized.next(true);
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        return Observable.throwError(error);
+        return throwError(error);
       })
     );
   }
