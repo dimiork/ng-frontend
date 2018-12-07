@@ -15,18 +15,18 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) { }
 
   getAllProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(environment.api_url + 'products', {}).pipe(
+    return this.httpClient.get<Product[]>(environment.api_url + '/products', {}).pipe(
       map((data: any) => data['products'])
     );
   }
 
   getProductById(id: string): Observable<Product> {
-    return this.httpClient.get<Product[]>(environment.api_url + 'products/' + id, {}).pipe(
+    return this.httpClient.get<Product[]>(environment.api_url + '/products/' + id, {}).pipe(
       map((data: any) => data['product'])
     );
   }
 
   createProduct(newProduct: Product): Observable<any> {
-    return this.httpClient.post(environment.api_url + 'products', newProduct);
+    return this.httpClient.post(environment.api_url + '/products', newProduct);
   }
 }
