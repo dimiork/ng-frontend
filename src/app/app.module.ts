@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
 import { AuthGuard } from './guards/auth.guard';
-import { AuthService } from './services/auth.service';
+import { AuthorizationService } from '../services/authorization.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule
   ],
   providers: [
-    AuthService,
+    AuthorizationService,
     AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}

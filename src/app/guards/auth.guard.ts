@@ -3,7 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import { AuthorizationService } from '../services/authorization.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +14,12 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthorizationService
     ) {
 
-<<<<<<< HEAD
     this.authService.getUser()
-    .subscribe(user => {
-      if (!!user) {
-=======
-    this.authService.getCurrentUser() // Check whether this function name matches the one in the authService
     .subscribe((client: any) => {
       if (!!client) {
->>>>>>> release v1.0
         this.router.navigate(['home']);
         this.hasAcces = true;
 
@@ -42,10 +36,6 @@ export class AuthGuard implements CanActivate {
     if (!this.hasAcces) {
       this.router.navigate(['login']);
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> release v1.0
 
     return this.hasAcces;
   }
