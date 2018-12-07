@@ -17,9 +17,15 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService
     ) {
 
+<<<<<<< HEAD
     this.authService.getUser()
     .subscribe(user => {
       if (!!user) {
+=======
+    this.authService.getCurrentUser() // Check whether this function name matches the one in the authService
+    .subscribe((client: any) => {
+      if (!!client) {
+>>>>>>> release v1.0
         this.router.navigate(['home']);
         this.hasAcces = true;
 
@@ -36,7 +42,10 @@ export class AuthGuard implements CanActivate {
     if (!this.hasAcces) {
       this.router.navigate(['login']);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> release v1.0
 
     return this.hasAcces;
   }
