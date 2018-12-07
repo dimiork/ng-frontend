@@ -4,10 +4,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MaterialModule } from './material/material.module';
 
-//Interceptors
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
-
 
 @NgModule({
   declarations: [
@@ -15,10 +14,11 @@ import { TokenInterceptor, ErrorInterceptor } from './interceptors';
   ],
   imports: [
     BrowserModule,
+    MaterialModule,
+
     AppRoutingModule
   ],
   providers: [
-  //Interceptors
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
