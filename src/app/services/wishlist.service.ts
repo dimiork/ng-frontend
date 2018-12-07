@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WishlistService {
 
-  private wishlistUrl = "https://incode-store.herokuapp.com/wishlists";
+  @Input(environment.srcService) srcService;
+
+
+  private wishlistUrl = `${this.srcService}/wishlists`;
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +24,7 @@ export class WishlistService {
     return this.http.post<any>(this.wishlistUrl, newWishlist);
   }
 
-  updateWishlist(id: number, update): Observable<any> {
+  updateWishlist(id: string, update): Observable<any> {
     return this.http.put<any>(this.wishlistUrl + '/' + id, update);
   }
   
