@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
