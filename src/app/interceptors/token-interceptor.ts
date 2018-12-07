@@ -3,24 +3,25 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 
 import { Observable } from 'rxjs';
 
-
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
 
-	constructor() {}
+  constructor() {
+    //
+  }
 
-	intercept(
-		request: HttpRequest<any>,
-		next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler): Observable<HttpEvent<any>> {
 
-		let tokenizedRequest = request.clone({
-			setHeaders: {
-				Authirization: `Bearer ${localStorage.getItem('token')}`
-			}
-		});
+    const tokenizedRequest: HttpRequest<any> = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
 
-		return next.handle(tokenizedRequest);
-	}
+    return next.handle(tokenizedRequest);
+  }
 }
