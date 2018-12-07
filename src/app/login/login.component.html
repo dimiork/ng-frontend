@@ -22,17 +22,17 @@
 
           <mat-form-field class="login-card__form-field">
             <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
-         </mat-form-field></td>
+          </mat-form-field></td>
 
-       </tr>
-     </table>
-     </form>
-     <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+        </tr>
+      </table>
+    </form>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
 
-   </mat-card-content>
+  </mat-card-content>
 
-   <mat-card-actions>
-     <button mat-raised-button (click)="login()" color="primary">Login</button>
-   </mat-card-actions>
-   
- </mat-card>
+  <mat-card-actions>
+   <button mat-raised-button (click)="login()" color="primary">Login</button>
+ </mat-card-actions>
+ 
+</mat-card>
