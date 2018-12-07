@@ -41,7 +41,7 @@ export class AuthorizationService {
     return this.user.asObservable();
   }
 
-  public login(credentials: Credentials): Observable<void> {
+  public login(credentials: Credentials): Observable<AuthorizationResponse> {
 
     return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/login', credentials).pipe(
       tap((response: AuthorizationResponse) => {
@@ -54,9 +54,9 @@ export class AuthorizationService {
         return throwError(error);
       })
     );
-  }
+  } 
 
-  public register(credentials: Credentials): Observable<void> {
+  public register(credentials: Credentials): Observable<AuthorizationResponse> {
 
     return this.http.post<AuthorizationResponse>('https://incode-store.herokuapp.com/auth', credentials).pipe(
       tap((response: AuthorizationResponse) => {
