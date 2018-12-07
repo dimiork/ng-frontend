@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class WishlistService {
 
-  api_url;
+  api_url: string;
 
-  private wishlistUrl = `${this.api_url}/wishlists`;
+  private wishlistUrl: string = `${this.api_url}/wishlists`;
 
   constructor(private http: HttpClient) { }
 
@@ -18,12 +18,11 @@ export class WishlistService {
     return this.http.get<any>(this.wishlistUrl);
   }
 
-  creatWishlist(newWishlist): Observable<any> {
+  creatWishlist(newWishlist: any): Observable<any> {
     return this.http.post<any>(this.wishlistUrl, newWishlist);
   }
 
-  updateWishlist(id: string, update): Observable<any> {
+  updateWishlist(id: string, update: any): Observable<any> {
     return this.http.put<any>(this.wishlistUrl + '/' + id, update);
   }
-  
 }
