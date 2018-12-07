@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,
