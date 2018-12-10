@@ -17,7 +17,7 @@ export class WishlistService {
   getWishlist(): Observable<any> {
     return this.http.get<any>(this.wishlistUrl);
   }
-
+  
   creatWishlist(newWishlist: any): Observable<any> {
     return this.http.post<any>(this.wishlistUrl, newWishlist);
   }
@@ -25,4 +25,5 @@ export class WishlistService {
   updateWishlist(id: string, update: any): Observable<any> {
     return this.http.put<any>(this.wishlistUrl + '/' + id, update);
   }
+
 }
