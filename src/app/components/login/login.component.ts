@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../services/auth.service';
-import { Credentials } from '../models/credentials'
+import { AuthorizationService } from '../../services/authorization.service';
+import { Credentials } from '../../models/credentials'
 
 @Component({
   selector: 'app-login',
@@ -11,10 +11,13 @@ import { Credentials } from '../models/credentials'
 })
 export class LoginComponent {
 
-  private loginUserData: Credentials;
+  private userCredentials: Credentials = {
+    login: '',
+    password: ''
+  };
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthorizationService,
     private router: Router
     ) {
 
@@ -24,14 +27,14 @@ export class LoginComponent {
   }
 
   loginUser(): void {
-    if (Object.values(this.loginUserData).length) {
-      this.authService.route = 'login';
-      this.authService.login(this.loginUserData)
+    if ( this.userCredentials.login && this.userCredentials.password ) {
+      this.authService.login(this.userCredentials)
       .subscribe(
-        (result: any) => {
+        res => {
           this.router.navigate(['home']);
-        }
-        );
+        });
+    } else {
+      alert('Please enter login and password!');
     }
   }
 
