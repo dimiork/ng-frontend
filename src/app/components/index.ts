@@ -1,3 +1,1 @@
-import { ProductComponent } from './product/product.component';
-
-export { ProductComponent };
+export * from './product/product.component';

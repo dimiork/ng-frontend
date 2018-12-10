@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError(
           (error: any) => {
             if (error.status === 401) {
-              location.reload(true);
+              // location.reload(true);
             }
 
             const errToThrow: string = error.error.message || error.statusText;
