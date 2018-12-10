@@ -26,10 +26,7 @@ export class RegisterComponent {
     this.authService.register(this.registerForm.value)
     .subscribe(
       (res: any) => {
-        // this.router.navigate(['home']);
-      },
-      (err: any) => {
-        alert('User not found');
+        this.router.navigate(['']);
       });
   }
 
