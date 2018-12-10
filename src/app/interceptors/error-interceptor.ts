@@ -4,13 +4,15 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { AuthorizationService } from '../services/authorization.service';
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor() {
+  constructor(private authService: AuthorizationService) {
     //
   }
 
@@ -23,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError(
           (error: any) => {
             if (error.status === 401) {
-              location.reload(true);
+              this.authService.logout();
             }
 
             const errToThrow: string = error.error.message || error.statusText;
