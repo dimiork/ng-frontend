@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthorizationService } from '../../services/authorization.service';
-import { Credentials } from '../../models/credentials'
+import { Credentials } from '../../models/credentials';
 
 @Component({
   selector: 'app-login',
@@ -30,11 +30,10 @@ export class LoginComponent {
     if ( this.userCredentials.login && this.userCredentials.password ) {
       this.authService.login(this.userCredentials)
       .subscribe(
-        res => {
-          debugger;
-          this.router.navigate(['home']);
+        (res: any) => {
+          // this.router.navigate(['home']);
         },
-        err => {
+        (err: any) => {
           alert('User not found');
         });
     } else {
