@@ -1,14 +1,13 @@
 <div class="flex-container">
-			<mat-card class="flex-item" *ngFor="let product of products">
-			  <mat-card-header>
-			    <div mat-card-avatar class="example-header-image"></div>
-			    <mat-card-title>{{ product.title }}</mat-card-title>
-			    <mat-card-subtitle>Price: {{ product.price }}</mat-card-subtitle>
-			  </mat-card-header>
-			  <img mat-card-image src="https://dummyimage.com/640x320/000/fff.png" alt="Photo of a Shiba Inu">
-			  <mat-card-content></mat-card-content>
-			  <mat-card-actions>
-			    <button mat-button disabled>Add to Cart</button>
-			  </mat-card-actions>
-			</mat-card>
+  <mat-card class="product flex-item" *ngFor="let product of products">
+    <mat-card-header>
+      <mat-card-title class="product__title">{{ product.title }}</mat-card-title>
+      <mat-card-subtitle class="product__price">Price: {{ product.price }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="product__image" src="{{ product.thumbnail }}" alt="Photo of a product {{ product.title }}">
+    <mat-card-content class="product__description"></mat-card-content>
+    <mat-card-actions>
+      <button mat-button disabled>Add to Cart</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

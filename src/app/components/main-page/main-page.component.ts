@@ -23,6 +23,16 @@ export class MainPageComponent implements OnInit {
         'price': 99.99,
         'stock': 1,
         'thumbnail': 'string'
+      },
+      {
+        'id': '5b85097083d82c2de542be4b',
+        'title': 'string',
+        'description': 'string',
+        'category_id': 'string',
+        'category_title': 'string',
+        'price': 99.99,
+        'stock': 1,
+        'thumbnail': 'string'
       }];
   }
 
