@@ -1,23 +1,45 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatInputModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule
+    } from '@angular/material';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     FormsModule,
-
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   exports: [
+    CommonModule,
     FormsModule,
-
     MatInputModule,
-    BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }
