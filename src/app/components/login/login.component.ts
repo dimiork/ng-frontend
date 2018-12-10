@@ -21,9 +21,9 @@ export class LoginComponent {
     private router: Router
     ) {
 
-    if (localStorage.getItem('token')) {
-      this.router.navigate(['home']);
-    }
+    // if (localStorage.getItem('token')) {
+    //   this.router.navigate(['home']);
+    // }
   }
 
   loginUser(): void {
@@ -31,7 +31,11 @@ export class LoginComponent {
       this.authService.login(this.userCredentials)
       .subscribe(
         res => {
+          debugger;
           this.router.navigate(['home']);
+        },
+        err => {
+          alert('User not found');
         });
     } else {
       alert('Please enter login and password!');
