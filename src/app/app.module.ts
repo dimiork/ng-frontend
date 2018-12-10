@@ -12,13 +12,15 @@ import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainPageComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
