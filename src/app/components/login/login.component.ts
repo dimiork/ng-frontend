@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthorizationService } from '../../services/authorization.service';
 import { Credentials } from '../../models/credentials';
@@ -17,37 +17,29 @@ export class LoginComponent {
     password: ''
   };
 
-  private login = new FormControl('');
-  private password = new FormControl('');
+  public loginForm: FormGroup = new FormGroup({
+    login: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
 
   constructor(
     private authService: AuthorizationService,
     private router: Router
-    ) {
-
-    // if (localStorage.getItem('token')) {
-    //   this.router.navigate(['home']);
-    // }
-  }
+    ) { }
 
   loginUser(): void {
 
-    if ( this.login.value && this.password.value ) {
+    this.userCredentials.login = this.loginForm.value.login;
+    this.userCredentials.password = this.loginForm.value.password;
 
-      this.userCredentials.login = this.login.value;
-      this.userCredentials.password = this.password.value;
-
-      this.authService.login(this.userCredentials)
-      .subscribe(
-        (res: any) => {
-          // this.router.navigate(['home']);
-        },
-        (err: any) => {
-          alert('User not found');
-        });
-    } else {
-      alert('Please enter login and password!');
-    }
+    this.authService.login(this.userCredentials)
+    .subscribe(
+      (res: any) => {
+        // this.router.navigate(['home']);
+      },
+      (err: any) => {
+        alert('User not found');
+      });
   }
 
 }
