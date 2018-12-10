@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthorizationService } from '../../services/authorization.service';
-import { Credentials } from '../../models/credentials';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +10,6 @@ import { Credentials } from '../../models/credentials';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
-  private userCredentials: Credentials = {
-    login: '',
-    password: ''
-  };
 
   public loginForm: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
@@ -29,12 +23,10 @@ export class LoginComponent {
 
   loginUser(): void {
 
-    this.userCredentials.login = this.loginForm.value.login;
-    this.userCredentials.password = this.loginForm.value.password;
-
-    this.authService.login(this.userCredentials)
+    this.authService.login(this.loginForm.value)
     .subscribe(
       (res: any) => {
+        console.log('Succes');
         // this.router.navigate(['home']);
       },
       (err: any) => {
