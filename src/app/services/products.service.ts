@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,8 +14,22 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(environment.api_url + '/products', {}).pipe(
+  getAllProducts(filter?: any): Observable<Product[]> {
+    let params: HttpParams;
+
+    if (filter) {
+      params = new HttpParams();
+
+      Object.entries(filter).forEach(
+          ([key, value]: any) => {
+            if (value) {
+              params = params.append(key, value);
+            }
+          }
+      );
+    }
+
+    return this.httpClient.get<Product[]>(environment.api_url + '/products', { params }).pipe(
       map((data: any) => data['products'])
     );
   }
@@ -28,5 +42,17 @@ export class ProductsService {
 
   createProduct(newProduct: Product): Observable<any> {
     return this.httpClient.post(environment.api_url + '/products', newProduct);
+  }
+
+  public getCategories(): Observable<any> {
+    return this.httpClient.get<any>(environment.api_url + '/categories').pipe(
+      map((data: any) => {
+        const categories: string[] = data.categories
+          .map((category: any) => category.title)
+          .filter((category: string) => category);
+
+          return categories;
+      })
+    );
   }
 }

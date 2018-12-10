@@ -12,7 +12,9 @@ import {
   MatMenuModule,
   MatIconModule,
   MatProgressSpinnerModule,
-  MatListModule
+  MatListModule,
+  MatFormFieldModule,
+  MatSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -20,22 +22,6 @@ import {
   imports: [
     CommonModule,
     FormsModule,
-
-    MatInputModule,
-    MatCardModule,
-    MatGridListModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatProgressSpinnerModule
-  ],
-  exports: [
-    CommonModule,
-    FormsModule,
-
     MatInputModule,
     MatCardModule,
     MatGridListModule,
@@ -46,7 +32,25 @@ import {
     MatMenuModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatListModule
+    MatFormFieldModule,
+    MatSelectModule
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    MatInputModule,
+    MatCardModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }
