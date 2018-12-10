@@ -4,6 +4,7 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
 import { MaterialModule } from './material/material.module';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
@@ -12,7 +13,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
+    HeaderComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
