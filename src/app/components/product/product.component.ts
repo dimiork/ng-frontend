@@ -9,14 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  product: Product = {
-    title: 'string',
-    description: 'string',
-    category_title: 'string',
-    price: 100,
-    stock: 10,
-    thumbnail: 'string'
-  };
+  product: Product;
 
   id: string;
 
