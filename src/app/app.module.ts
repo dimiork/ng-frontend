@@ -27,7 +27,6 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     MaterialModule,
     AppRoutingModule,
-    productPage,
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
