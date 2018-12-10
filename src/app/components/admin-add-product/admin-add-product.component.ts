@@ -9,7 +9,7 @@ export class AdminAddProductComponent implements OnInit {
 
   constructor() { /**/}
 
-  ngOnInit() {/**/
+  ngOnInit(): void {/**/
   }
 
 }
