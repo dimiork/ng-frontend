@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { Wishlist } from '../models/wishlist.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
