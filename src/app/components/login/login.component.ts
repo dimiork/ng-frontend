@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 import { AuthorizationService } from '../../services/authorization.service';
 import { Credentials } from '../../models/credentials';
@@ -16,6 +17,9 @@ export class LoginComponent {
     password: ''
   };
 
+  private login = new FormControl('');
+  private password = new FormControl('');
+
   constructor(
     private authService: AuthorizationService,
     private router: Router
@@ -27,7 +31,12 @@ export class LoginComponent {
   }
 
   loginUser(): void {
-    if ( this.userCredentials.login && this.userCredentials.password ) {
+
+    if ( this.login.value && this.password.value ) {
+
+      this.userCredentials.login = this.login.value;
+      this.userCredentials.password = this.password.value;
+
       this.authService.login(this.userCredentials)
       .subscribe(
         (res: any) => {

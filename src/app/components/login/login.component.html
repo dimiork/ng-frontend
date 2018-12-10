@@ -11,7 +11,7 @@
          <td>
 
            <mat-form-field class="login__form-field">
-             <input class="login__input" matInput placeholder="Login" [(ngModel)]="userCredentials.login" name="login" required>
+             <input class="login__input" matInput placeholder="Login" [formControl]="login" name="login" required>
            </mat-form-field>
 
          </td>
@@ -20,7 +20,7 @@
          <td>
 
           <mat-form-field class="login__form-field">
-           <input class="login__input" matInput placeholder="Password" [(ngModel)]="userCredentials.password" type="password" name="password" required>
+           <input class="login__input" matInput placeholder="Password" [formControl]="password" type="password" name="password" required>
          </mat-form-field>
 
        </td>
