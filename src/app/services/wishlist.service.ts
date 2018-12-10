@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class WishlistService {
 
-  api_url: string;
-
-  private wishlistUrl: string = `${this.api_url}/wishlists`;
+  private wishlistUrl: string = `${environment.api_url}/wishlists`;
 
   constructor(private http: HttpClient) { }
 
