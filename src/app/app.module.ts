@@ -2,16 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TokenInterceptor, ErrorInterceptor } from './interceptors';
+import { MaterialModule } from './material/material.module';
 import { AuthGuard } from './guards/auth.guard';
+import { TokenInterceptor, ErrorInterceptor } from './interceptors';
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule,
