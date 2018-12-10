@@ -9,20 +9,26 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  product: Product;
+  product: Product = {
+    title: 'string',
+    description: 'string',
+    category_title: 'string',
+    price: 100,
+    stock: 10,
+    thumbnail: 'string'
+  };
 
   id: string;
 
-  constructor(private productsService: ProductsService, private activateRoute: ActivatedRoute, private router: Router) {
-    const urlArr: string[] = this.router.url.split('/');
-    this.id = urlArr[urlArr.length - 1];
+  constructor(private productsService: ProductsService, private activateRoute: ActivatedRoute) {
+    const arrLength: number = this.activateRoute.url['value'].length;
+    this.id = this.activateRoute.url['value'][arrLength - 1].path;
   }
 
   ngOnInit(): void {
     this.productsService.getProductById(this.id).subscribe(
       (product: Product) => {
         this.product = product;
-        console.log(this.product);
       },
       (err: any) => {
         console.log(err);
