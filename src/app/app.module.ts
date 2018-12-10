@@ -29,7 +29,6 @@ import { AdminAddProductComponent } from './components';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
   ],
   providers: [
     AuthGuard,
