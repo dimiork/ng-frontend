@@ -14,8 +14,8 @@ export class WishlistService {
 
   constructor(private http: HttpClient) { }
 
-  getWishlist(): Observable<Wishlist> {
-    return this.http.get<Wishlist>(this.wishlistUrl);
+  getWishlist(): Observable<any> {
+    return this.http.get<any>(this.wishlistUrl);
   }
   
   creatWishlist(newWishlist: any): Observable<any> {
