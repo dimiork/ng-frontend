@@ -18,7 +18,7 @@ export class WishlistService {
     return this.http.get<any>(this.wishlistUrl);
   }
 
-  getWishlistById(id): Observable<any> {
+  getWishlistById(id: string): Observable<any> {
     return this.http.get<any>(this.wishlistUrl + '/' + id);
   }
 
