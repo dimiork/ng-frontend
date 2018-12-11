@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MaterialModule } from './material/material.module';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
+import { ProductComponent } from './components';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -18,6 +19,7 @@ import { AdminPageComponent } from './components';
 @NgModule({
   declarations: [
     AppComponent,
+    ProductComponent,
     HeaderComponent,
     MainPageComponent,
     LoginComponent,

@@ -28,7 +28,6 @@
     flex: auto;
     align-self: auto;
   }
-
 }
 
 .flex-container {
@@ -47,4 +46,9 @@
   order: 0;
   display: flex;
   flex-direction: column;
+}
+
+.product a {
+  color: inherit;
+  text-decoration: inherit;
 }
