@@ -27,11 +27,10 @@
      </tr>
    </table>
  </form>
- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
 </mat-card-content>
 
 <mat-card-actions>
- <button [disabled]="registerForm.status === 'VALID' ? false : true" mat-raised-button (click)="registerUser()" color="primary">Login</button>
+ <button [disabled]="isInvalid()" mat-raised-button (click)="registerUser()" color="primary">Register</button>
 </mat-card-actions>
 
 </mat-card>

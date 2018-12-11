@@ -11,7 +11,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 })
 export class RegisterComponent {
 
-  public registerForm: FormGroup = new FormGroup({
+  private registerForm: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
@@ -21,13 +21,17 @@ export class RegisterComponent {
     private router: Router
     ) { }
 
-  loginUser(): void {
+  registerUser(): void {
 
     this.authService.register(this.registerForm.value)
     .subscribe(
       (res: any) => {
         this.router.navigate(['']);
       });
+  }
+
+  isInvalid(): boolean {
+    return this.registerForm.invalid;
   }
 
 }
