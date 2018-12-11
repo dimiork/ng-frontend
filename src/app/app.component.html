@@ -1,5 +1,5 @@
 <div>
   <app-header></app-header>
 
-  <router-outlet></router-outlet>
+  <router-outlet *ngIf="isReady"></router-outlet>
 </div>
