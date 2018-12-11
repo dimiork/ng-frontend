@@ -50,7 +50,7 @@ export class AuthorizationService {
 
   public login(credentials: Credentials): Observable<AuthorizationResponse> {
 
-    return this.http.post<AuthorizationResponse>(`${environment.api_url}/login`, credentials).pipe(
+    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/login`, credentials).pipe(
       tap((response: AuthorizationResponse) => {
         this.authResponseHandler(response);
       }),
@@ -62,7 +62,7 @@ export class AuthorizationService {
 
   public register(credentials: Credentials): Observable<AuthorizationResponse> {
 
-    return this.http.post<AuthorizationResponse>(`${environment.api_url}/auth`, credentials).pipe(
+    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/auth`, credentials).pipe(
       tap((response: AuthorizationResponse) => {
         this.authResponseHandler(response);
       }),
@@ -72,12 +72,12 @@ export class AuthorizationService {
     );
   }
 
-  public fetchUser(): Observable<User> {
+  public fetchUser (): Observable<User> {
 
-    return this.http.get<User>(`${environment.api_url}/user`);
+    return this.http.get<User>(`${ environment.api_url }/user`);
   }
 
-  public logout(): void {
+  public logout (): void {
 
     this.authorized.next(false);
     this.user.next(null);

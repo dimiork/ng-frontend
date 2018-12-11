@@ -24,6 +24,6 @@ export class DisableLoginGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> | boolean {
-    return this.userIsLogin;
+    return !this.userIsLogin;
   }
 }

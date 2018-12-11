@@ -19,8 +19,8 @@ const childAdminRouts: Routes = [
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [DisableLoginGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [DisableLoginGuard] },
   { path: 'admin', component: AdminPageComponent, children: childAdminRouts },
 ];
 
