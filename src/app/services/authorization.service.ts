@@ -39,9 +39,9 @@ export class AuthorizationService {
       this.user = new BehaviorSubject<User>(null);
 
       return this.fetchUser().pipe(
-        tap((result: User) => {
-          this.user.next(result);
-        })
+          tap((result: User) => {
+            this.user.next(result);
+          })
       );
     }
 
