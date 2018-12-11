@@ -13,7 +13,7 @@ import { StatisticsPageComponent } from './components/';
 
 const childAdminRouts: Routes = [
   { path: '', redirectTo: 'statistics', pathMatch: 'full' },
-  { path: 'statistics', component: StatisticsPageComponent }, // todo replace MainPageComponent
+  { path: 'statistics', component: StatisticsPageComponent },
   { path: 'category', component: AddCategoryComponent },
   { path: 'product', component: AdminAddProductComponent },
   { path: '**', redirectTo: 'statistics', pathMatch: 'full' }
