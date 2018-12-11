@@ -9,10 +9,11 @@ import { DisableLoginGuard } from './guards/disable-login.guard';
 import { AddCategoryComponent, AdminAddProductComponent, AdminPageComponent } from './components';
 import { ProductComponent } from './components';
 import { WishlistPageComponent } from './components/wishlist-page/wishlist-page.component';
+import { StatisticsPageComponent } from './components/';
 
 const childAdminRouts: Routes = [
   { path: '', redirectTo: 'statistics', pathMatch: 'full' },
-  { path: 'statistics', component: MainPageComponent }, // todo replace MainPageComponent
+  { path: 'statistics', component: StatisticsPageComponent }, // todo replace MainPageComponent
   { path: 'category', component: AddCategoryComponent },
   { path: 'product', component: AdminAddProductComponent },
   { path: '**', redirectTo: 'statistics', pathMatch: 'full' }

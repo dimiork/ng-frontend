@@ -7,7 +7,6 @@ import { tap, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Product, WishlistResponse } from '../models/';
 import { NotificationService } from '../services/notification.service';
-import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'

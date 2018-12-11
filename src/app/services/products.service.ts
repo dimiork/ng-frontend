@@ -67,4 +67,5 @@ export class ProductsService {
   createCategory(newCategory: Category): Observable<any> {
     return this.httpClient.post(environment.api_url + '/categories', newCategory);
   }
+
 }

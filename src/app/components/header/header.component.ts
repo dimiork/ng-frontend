@@ -3,12 +3,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AuthorizationService } from '../../services/authorization.service';
 import { User } from '../../models/';
-
-import { Observable } from 'rxjs';
-
-import { User } from '../../models/user';
 import { AuthorizationService } from '../../services/';
 
 @Component({
@@ -25,10 +20,6 @@ export class HeaderComponent {
 
     this.isAuthorized$ = this.authService.isAuthorized();
     this.user$ = this.authService.getUser();
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 
   logout(): void {
