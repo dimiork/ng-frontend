@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { mergeMap } from 'rxjs/operators';
+
 import { WishlistService } from '../../services/wishlist.service';
 import { Product } from 'src/app/models/product.model';
 import { AuthorizationService } from 'src/app/services/authorization.service';
-import { mergeMap } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 
 @Component({
