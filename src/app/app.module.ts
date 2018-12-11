@@ -11,16 +11,22 @@ import { MaterialModule } from './material/material.module';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor, ErrorInterceptor } from './interceptors';
 import { WishlistPageComponent } from './components/wishlist-page/wishlist-page.component';
+import { ProductComponent } from './components';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AdminPageComponent } from './components';
 
 @NgModule({
   declarations: [
     AppComponent,
     WishlistPageComponent,
+    ProductComponent,
     HeaderComponent,
     MainPageComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,

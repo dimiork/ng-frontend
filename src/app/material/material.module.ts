@@ -5,16 +5,17 @@ import { MatInputModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatProgressSpinnerModule
-    } from '@angular/material';
+  MatInputModule,
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatListModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -46,7 +47,8 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }

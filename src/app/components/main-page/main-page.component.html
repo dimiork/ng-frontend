@@ -1,15 +1,20 @@
 <div class="flex-container">
+
   <mat-card class="product flex-item" *ngFor="let product of products">
-    <mat-card-header>
-      <mat-card-title class="product__title">{{ product.title }}</mat-card-title>
-      <mat-card-subtitle class="product__price">Price: {{ product.price }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image class="product__image" src="{{ product.thumbnail }}" alt="Photo of a product {{ product.title }}">
-    <mat-card-content class="product__description">
-      <p>{{ product.description }}</p>
-    </mat-card-content>
-    <mat-card-footer class="product__actions">
-      <button mat-button disabled class="product__button">Add to Cart</button>
-    </mat-card-footer>
+      <a routerLink="products/{{product.id}}">
+      <mat-card-header>
+        <mat-card-title class="product__title">{{ product.title }}</mat-card-title>
+        <mat-card-subtitle class="product__price">Price: {{ product.price }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image class="product__image" src="{{ product.thumbnail }}"
+           alt="Photo of a product {{ product.title }}">
+      <mat-card-content class="product__description">
+        <p>{{ product.description }}</p>
+      </mat-card-content>
+      <mat-card-footer class="product__actions">
+        <button mat-button disabled class="product__button">Add to Cart</button>
+      </mat-card-footer>
+      </a>
   </mat-card>
+
 </div>
