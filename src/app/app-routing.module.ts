@@ -9,19 +9,19 @@ import { RegisterComponent } from './components/register/register.component';
 import { DisableLoginGuard } from './guards/disable-login.guard';
 import { AdminPageComponent } from './components';
 
-const routes: Routes = [
-  { path: '', component: MainPageComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: AdminPageComponent, children: childAdminRouts },
-];
-
 const childAdminRouts: Routes = [
   { path: '', redirectTo: 'statistics', pathMatch: 'full' },
   { path: 'statistics', component: MainPageComponent }, // todo replace MainPageComponent
   { path: 'category', component: MainPageComponent }, // todo replace MainPageComponent
   { path: 'product', component: MainPageComponent }, // todo replace MainPageComponent
   { path: '**', redirectTo: 'statistics', pathMatch: 'full' }
+];
+
+const routes: Routes = [
+  { path: '', component: MainPageComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'admin', component: AdminPageComponent, children: childAdminRouts },
 ];
 
 @NgModule({
