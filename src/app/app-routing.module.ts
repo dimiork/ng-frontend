@@ -8,17 +8,11 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminPageComponent } from './components';
 
 const childAdminRouts: Routes = [
-  {
-    path: 'admin',
-    component: AdminPageComponent,
-    children: [
-      { path: '', redirectTo: 'statistics', pathMatch: 'full' },
-      { path: 'statistics', component: MainPageComponent }, // todo replace MainPageComponent
-      { path: 'category', component: MainPageComponent }, // todo replace MainPageComponent
-      { path: 'product', component: MainPageComponent }, // todo replace MainPageComponent
-      { path: '**', redirectTo: 'statistics', pathMatch: 'full' }
-    ]
-  }
+  { path: '', redirectTo: 'statistics', pathMatch: 'full' },
+  { path: 'statistics', component: MainPageComponent }, // todo replace MainPageComponent
+  { path: 'category', component: MainPageComponent }, // todo replace MainPageComponent
+  { path: 'product', component: MainPageComponent }, // todo replace MainPageComponent
+  { path: '**', redirectTo: 'statistics', pathMatch: 'full' }
 ];
 
 const routes: Routes = [
