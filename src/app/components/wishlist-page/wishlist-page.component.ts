@@ -23,7 +23,7 @@ export class WishlistPageComponent implements OnInit {
   ngOnInit(): void {
     this.authorizationService.getUser()
     .pipe(mergeMap((response: User) => this.wishlistService.getWishlistById(response.id)))
-    .subscribe();
+    .subscribe( (data: Product[]) => this.products = data);
   }
 
 }
