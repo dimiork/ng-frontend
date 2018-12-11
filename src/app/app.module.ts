@@ -4,6 +4,8 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -21,6 +23,7 @@ import { AddCategoryComponent } from './components';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
 import { NotificationService } from './services/';
+import { StatisticsPageComponent } from './components/';
 
 @NgModule({
   declarations: [
@@ -33,8 +36,9 @@ import { NotificationService } from './services/';
     RegisterComponent,
     AdminPageComponent,
     AdminAddProductComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
     SpinnerComponent,
+    StatisticsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +47,7 @@ import { NotificationService } from './services/';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxChartsModule
   ],
   providers: [
     AuthGuard,
