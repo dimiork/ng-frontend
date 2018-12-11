@@ -1,0 +1,25 @@
+<section>
+
+  <app-header></app-header>
+
+  <div class="wrapper">
+
+    <router-outlet></router-outlet>
+
+    <div class="menu">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <button (click)="statisticsClick()" mat-menu-item>Statistics</button>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <button (click)="categoryClick()" mat-menu-item>Add Category</button>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <button (click)="productClick()" mat-menu-item>Add Product</button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+  </div>
+
+</section>

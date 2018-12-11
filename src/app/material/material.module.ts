@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatProgressSpinnerModule
-    } from '@angular/material';
+  MatInputModule,
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatListModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,8 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }
