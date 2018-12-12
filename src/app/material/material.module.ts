@@ -11,7 +11,10 @@ import {
   MatMenuModule,
   MatIconModule,
   MatProgressSpinnerModule,
-  MatListModule
+  MatListModule,
+  MatFormFieldModule,
+  MatRippleModule,
+  MatSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -29,7 +32,10 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatRippleModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -48,7 +54,10 @@ import {
     MatMenuModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatRippleModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

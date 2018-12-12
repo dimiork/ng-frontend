@@ -8,8 +8,8 @@
                  class="form-control" id="title" placeholder="Product title">
         </mat-form-field>
         <div *ngIf="submitted && formControls.title.errors" class="invalid-feedback">
-          <div *ngIf="formControls.title.errors.required">Product title is required</div>
-          <div *ngIf="formControls.title.errors.minlength">Min length is 3 char</div>
+          <div *ngIf="formControls.title.errors?.required">Product title is required</div>
+          <div *ngIf="formControls.title.errors?.minlength">Min length is 3 char</div>
         </div>
       </div>
 
@@ -19,16 +19,22 @@
                  class="form-control" id="description" placeholder="Description">
         </mat-form-field>
         <div *ngIf="submitted && formControls.description.errors" class="invalid-feedback">
-          <div *ngIf="formControls.description.errors.maxlength">Max length is 255 char</div>
+          <div *ngIf="formControls.description.errors?.maxlength">Max length is 255 char</div>
         </div>
       </div>
 
       <div class="form-group">
         <mat-form-field class="form-field">
-          <input matInput [ngClass]="{'is-invalid': submitted && formControls.category_title.errors}" formControlName="category_title" type="text"
-                 class="form-control" id="category-title" placeholder="Category title">
+            <mat-select matInput [ngClass]="{'is-invalid': submitted && formControls.category_title.errors}" formControlName="category_title"
+                        placeholder="Choose category" id="category-title">
+              <mat-option *ngFor="let category of categories" value="category.id">
+                {{category.title}}
+              </mat-option>
+            </mat-select>
         </mat-form-field>
-        <div *ngIf="submitted && formControls.category_title.errors" class="invalid-feedback"></div>
+        <div *ngIf="submitted && formControls.category_title.errors" class="invalid-feedback">
+          <div *ngIf="formControls.category_title.errors?.required">Category is required</div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -37,7 +43,7 @@
                  class="form-control" id="price" placeholder="Price">
         </mat-form-field>
         <div *ngIf="submitted && formControls.price.errors" class="invalid-feedback">
-          <div *ngIf="formControls.price.errors.required">Price is required</div>
+          <div *ngIf="formControls.price.errors?.required">Price is required</div>
         </div>
       </div>
 
@@ -47,14 +53,14 @@
                  class="form-control" id="stock" placeholder="Stock">
         </mat-form-field>
         <div *ngIf="submitted && formControls.stock.errors" class="invalid-feedback">
-          <div *ngIf="formControls.stock.errors.required">Stock is required</div>
+          <div *ngIf="formControls.stock.errors?.required">Stock is required</div>
         </div>
       </div>
 
       <div class="form-group">
         <mat-form-field class="form-field">
           <input matInput [ngClass]="{'is-invalid': submitted && formControls.thumbnail.errors}" formControlName="thumbnail" type="text"
-                 class="form-control" id="thumbnail" placeholder="Enter task title">
+                 class="form-control" id="thumbnail" placeholder="Thumbnail">
         </mat-form-field>
         <div *ngIf="submitted && formControls.thumbnail.errors" class="invalid-feedback"></div>
       </div>
