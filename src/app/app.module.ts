@@ -24,6 +24,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 
 import { NotificationService } from './services/';
 import { StatisticsPageComponent } from './components/';
+import { CheckoutPageComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { StatisticsPageComponent } from './components/';
     AddCategoryComponent,
     SpinnerComponent,
     StatisticsPageComponent
+    CheckoutPageComponent
   ],
   imports: [
     BrowserModule,
