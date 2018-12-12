@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Product } from '../models/product.model';
-import { ProductsFilter } from  '../models/';
+import { ProductsFilter } from '../models/';
 import { environment } from '../../environments/environment';
 
 @Injectable({
