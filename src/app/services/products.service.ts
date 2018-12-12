@@ -15,23 +15,26 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) { }
 
   getAllProducts(filter?: any): Observable<Product[]> {
-    let params: HttpParams;
 
-    if (filter) {
-      params = new HttpParams();
-
-      Object.entries(filter).forEach(
-          ([key, value]: any) => {
-            if (value) {
-              params = params.append(key, value);
-            }
-          }
-      );
-    }
-
-    return this.httpClient.get<Product[]>(environment.api_url + '/products', { params }).pipe(
+    return this.httpClient.get<Product[]>(environment.api_url + '/products').pipe(
       map((data: any) => data['products'])
     );
+  }
+
+  getProductsByFilter(filter: any): Observable<Product[]> {
+    if (filter) {
+      let params: HttpParams = new HttpParams();
+
+      Object.entries(filter).forEach(([key, value]: any) => {
+        if (value) {
+          params = params.append(key, value);
+        }
+      });
+
+      return this.httpClient.get<Product[]>(environment.api_url + '/products', { params }).pipe(
+        map((data: any) => data['products'])
+      );
+    }
   }
 
   getProductById(id: string): Observable<Product> {
