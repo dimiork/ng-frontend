@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     this.authService.isAuthorized()
     .subscribe((isPermitted: any) => {
       if (!!isPermitted) {
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
         this.hasAcces = true;
 
         return;
