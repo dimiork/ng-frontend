@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
@@ -13,7 +13,7 @@ export class AdminAddProductComponent implements OnInit {
   newProductForm: FormGroup;
   submitted: boolean = false;
 
-  get f(): any {
+  get formControls(): {[key: string]: AbstractControl} {
     return this.newProductForm.controls;
   }
 
@@ -32,25 +32,20 @@ export class AdminAddProductComponent implements OnInit {
   }
 
   formOnSubmit(): void {
-    const formValues: FormGroup = this.newProductForm.value;
-
-    const newProduct: Product = {
-      title: formValues['title'],
-      description: formValues['description'],
-      category_title: formValues['category_title'],
-      price: formValues['price'],
-      stock: formValues['stock'],
-      thumbnail: formValues['thumbnail']
-    };
+    const newProduct: Product = this.newProductForm.value;
 
     this.submitted = true;
     if (this.newProductForm.invalid) {
       return;
     }
 
-    // this.productsService.createProduct(newProduct).subscribe(
-    //   (next: any) => {/**/},
-    //   (err: any) => {/**/}
-    // );
+    this.productsService.createProduct(newProduct).subscribe(
+      (next: any) => {
+        console.log(next);
+      },
+      (err: any) => {
+        console.error(err);
+      }
+    );
   }
 }
