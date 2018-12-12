@@ -19,6 +19,8 @@ import { AdminPageComponent } from './components';
 import { AdminAddProductComponent } from './components';
 import { AddCategoryComponent } from './components';
 
+import { NotificationService } from './services/';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { AddCategoryComponent } from './components';
   providers: [
     AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

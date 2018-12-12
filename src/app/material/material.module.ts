@@ -16,27 +16,12 @@ import {
   MatFormFieldModule,
   MatSelectModule,
   MatRippleModule,
+  MatSnackBarModule,
 } from '@angular/material';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatGridListModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatRippleModule,
-  ],
+  imports: [],
   exports: [
     CommonModule,
     FormsModule,
@@ -54,6 +39,7 @@ import {
     MatFormFieldModule,
     MatSelectModule,
     MatRippleModule,
+    MatSnackBarModule,
   ]
 })
 export class MaterialModule { }
