@@ -4,3 +4,4 @@ export * from './product/product.component';
 export * from './admin-add-product/admin-add-product.component';
 export * from './add-category/add-category.component';
 export { StatisticsPageComponent } from './statistics-page/statistics-page.component';
+export * from './checkout-page/checkout-page.component';
