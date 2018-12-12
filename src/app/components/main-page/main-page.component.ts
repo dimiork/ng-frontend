@@ -44,7 +44,7 @@ export class MainPageComponent {
       .filter((item: number | string) => params[item])
       .forEach((item: number | string) => filter[item] = params[item]);
 
-    this.products$ = this.productsService.getAllProducts(filter)
+    this.products$ = this.productsService.getAllProducts(filter);
   }
 
   public onResetFilters(): void {
