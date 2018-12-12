@@ -16,6 +16,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminPageComponent } from './components';
+import { AdminAddProductComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -26,15 +27,16 @@ import { AdminPageComponent } from './components';
     MainPageComponent,
     LoginComponent,
     RegisterComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    AdminAddProductComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MaterialModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
   ],
   providers: [
     AuthGuard,
