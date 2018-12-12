@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ProductsService } from '../../services/products.service';
+import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model';
 
 @Component({
@@ -20,7 +22,9 @@ export class MainPageComponent implements OnInit {
   filtersForm: FormGroup;
 
   constructor(
+    private router: Router,
     private productsService: ProductsService,
+    private orderService: OrderService,
   ) {
     this.products = [];
 
@@ -65,6 +69,17 @@ export class MainPageComponent implements OnInit {
   public onResetFilters(): void {
     this.filtersForm.reset();
     this.getProducts();
+  }
+
+  public onProductDetails(id: string): void {
+    this.router.navigate([`products/${id}`]);
+  }
+
+  public onAddToCart(product: Product, evt: any): void {
+    if (evt && product) {
+      evt.stopPropagation();
+      this.orderService.createOrder(product);
+    }
   }
 
 }

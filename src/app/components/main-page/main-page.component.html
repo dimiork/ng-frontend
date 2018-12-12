@@ -19,8 +19,7 @@
   </form>
   </div>
   <div class="flex-container" *ngIf="products.length">
-    <mat-card class="product flex-item" *ngFor="let product of products">
-      <a routerLink="products/{{product.id}}">
+    <mat-card class="product flex-item" *ngFor="let product of products" (click)="onProductDetails(product.id)">
       <mat-card-header>
         <mat-card-title class="product__title">{{ product.title }}</mat-card-title>
         <mat-card-subtitle class="product__price">Price: {{ product.price }}</mat-card-subtitle>
@@ -31,9 +30,8 @@
         <p>{{ product.description }}</p>
       </mat-card-content>
       <mat-card-footer class="product__actions">
-        <button mat-button disabled class="product__button">Add to Cart</button>
+        <button mat-button (click)="onAddToCart(product, $event)" class="product__button">Add to Cart</button>
       </mat-card-footer>
-      </a>
     </mat-card>
   </div>
   <div *ngIf="!products.length">
