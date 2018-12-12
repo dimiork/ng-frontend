@@ -3,8 +3,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
-import { CategoriesService } from '../../services/categories.service';
-import { Category } from '../../models/categories';
 
 @Component({
   selector: 'app-admin-add-product',
@@ -15,15 +13,14 @@ export class AdminAddProductComponent implements OnInit {
   newProductForm: FormGroup;
   submitted: boolean = false;
 
-  categories: Category[];
+  categories: string[];
 
   get formControls(): {[key: string]: AbstractControl} {
     return this.newProductForm.controls;
   }
 
   constructor(private formBuilder: FormBuilder,
-              private productsService: ProductsService,
-              private categoriesService: CategoriesService
+              private productsService: ProductsService
   ) {/**/}
 
   ngOnInit(): void {
@@ -36,8 +33,9 @@ export class AdminAddProductComponent implements OnInit {
       thumbnail: ['']
     });
 
-    this.categoriesService.getAllCategories().subscribe(
-      (categories: Category[]) => {
+    this.productsService.getCategories().subscribe(
+      (categories: string[]) => {
+        console.log(categories);
         this.categories = categories;
       },
       (err: any) => {

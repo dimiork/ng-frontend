@@ -27,8 +27,8 @@
         <mat-form-field class="form-field">
             <mat-select matInput [ngClass]="{'is-invalid': submitted && formControls.category_title.errors}" formControlName="category_title"
                         placeholder="Choose category" id="category-title">
-              <mat-option *ngFor="let category of categories" value="category.id">
-                {{category.title}}
+              <mat-option *ngFor="let category of categories" value="category">
+                {{category}}
               </mat-option>
             </mat-select>
         </mat-form-field>
