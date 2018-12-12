@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Product } from '../models/product.model';
+import { ProductsFilter } from  '../models/';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -15,13 +16,6 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) { }
 
   getAllProducts(filter?: any): Observable<Product[]> {
-
-    return this.httpClient.get<Product[]>(environment.api_url + '/products').pipe(
-      map((data: any) => data['products'])
-    );
-  }
-
-  getProductsByFilter(filter: any): Observable<Product[]> {
     if (filter) {
       let params: HttpParams = new HttpParams();
 
@@ -35,6 +29,10 @@ export class ProductsService {
         map((data: any) => data['products'])
       );
     }
+
+    return this.httpClient.get<Product[]>(environment.api_url + '/products').pipe(
+      map((data: any) => data['products'])
+    );
   }
 
   getProductById(id: string): Observable<Product> {

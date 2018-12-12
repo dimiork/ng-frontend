@@ -51,7 +51,7 @@ export class MainPageComponent implements OnInit {
       .filter((item: number | string) => params[item])
       .forEach((item: number | string) => filter[item] = params[item]);
 
-    this.productsService.getProductsByFilter(filter).subscribe((products: Product[]) => {
+    this.productsService.getAllProducts(filter).subscribe((products: Product[]) => {
       this.products = products;
     });
   }
