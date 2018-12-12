@@ -27,7 +27,7 @@ export class LoginComponent {
     .subscribe(
       (res: any) => {
         console.log('Succes');
-        // this.router.navigate(['home']);
+        this.router.navigate(['']);
       },
       (err: any) => {
         alert('User not found');

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
 import {
   MatInputModule,
   MatButtonModule,
@@ -13,8 +14,8 @@ import {
   MatProgressSpinnerModule,
   MatListModule,
   MatFormFieldModule,
+  MatSelectModule,
   MatRippleModule,
-  MatSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -23,10 +24,9 @@ import {
     CommonModule,
     FormsModule,
     MatInputModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatButtonModule,
     MatCardModule,
+    MatGridListModule,
+    MatButtonModule,
     MatDialogModule,
     MatTableModule,
     MatToolbarModule,
@@ -34,20 +34,16 @@ import {
     MatIconModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatRippleModule,
-    MatSelectModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     MatInputModule,
     MatCardModule,
-    MatToolbarModule,
-    MatMenuModule,
+    MatGridListModule,
     MatButtonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatCardModule,
     MatDialogModule,
     MatTableModule,
     MatToolbarModule,
@@ -56,8 +52,8 @@ import {
     MatProgressSpinnerModule,
     MatListModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatRippleModule,
-    MatSelectModule
   ]
 })
 export class MaterialModule { }

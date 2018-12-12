@@ -1,6 +1,25 @@
-<div class="flex-container">
-
-  <mat-card class="product flex-item" *ngFor="let product of products">
+<div>
+  <div class="filters-control">
+  <form [formGroup]="filtersForm">
+    <mat-form-field>
+      <mat-select placeholder="Choose category" formControlName="category">
+        <mat-option *ngFor="let item of categories" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input type="number" matInput placeholder="filter by price" formControlName="price">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input type="number" matInput placeholder="filter by quantity" formControlName="stock">
+    </mat-form-field>
+    <button mat-flat-button (click)="getFilteredProducts()">Get Filtered</button>
+    <button mat-flat-button (click)="onResetFilters()">Clear</button>
+  </form>
+  </div>
+  <div class="flex-container" *ngIf="products.length">
+    <mat-card class="product flex-item" *ngFor="let product of products">
       <a routerLink="products/{{product.id}}">
       <mat-card-header>
         <mat-card-title class="product__title">{{ product.title }}</mat-card-title>
@@ -15,6 +34,9 @@
         <button mat-button disabled class="product__button">Add to Cart</button>
       </mat-card-footer>
       </a>
-  </mat-card>
-
+    </mat-card>
+  </div>
+  <div *ngIf="!products.length">
+    There is no result for current filters
+  </div>
 </div>
