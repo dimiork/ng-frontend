@@ -35,12 +35,9 @@ export class AdminAddProductComponent implements OnInit {
 
     this.productsService.getCategories().subscribe(
       (categories: string[]) => {
-        console.log(categories);
         this.categories = categories;
       },
-      (err: any) => {
-        console.error(err);
-      }
+      (err: any) => {/**/}
     );
   }
 
