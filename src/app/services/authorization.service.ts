@@ -24,7 +24,7 @@ export class AuthorizationService {
     this.user = new BehaviorSubject<User | null>(null);
   }
 
-  // using for prevent router-outlet rendering untill user token is validated
+  // using for prevent app rendering untill user token is validated
   public isReady(): Observable<boolean> {
     if (!this.getToken()) {
       this.ready.next(true);
@@ -34,7 +34,7 @@ export class AuthorizationService {
   }
 
   public isAuthorized(): Observable<boolean> {
-    if (this.authorized.getValue() === false && this.getToken()) {
+    if (!this.authorized.getValue() && this.getToken()) {
         return this.fetchUser().pipe(
           switchMap((user: User) => {
 
@@ -52,7 +52,7 @@ export class AuthorizationService {
   }
 
   private authResponseHandler(response: AuthorizationResponse): void {
-    if (response.success === true) {
+    if (!!response.success) {
       this.saveToken(response.token);
       this.authorized.next(true);
     }
