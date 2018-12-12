@@ -1,3 +1,49 @@
-<p>
-  checkout-page works!
-</p>
+<section>
+  <div class="cart-wrapper">
+    <div class="cart">NOT IMPLEMENT</div>
+  </div>
+
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="formOnSubmit()">
+    <div class="form-field-container">
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submitted && formControls.card_number.errors}" formControlName="card_number" type="text"
+                 class="form-control" id="card_number" placeholder="Card number">
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.card_number.errors" class="invalid-feedback">
+          <div *ngIf="formControls.card_number.errors?.required">Product title is required</div>
+          <div *ngIf="formControls.card_number.errors?.minlength">Length must be 16 chars</div>
+          <div *ngIf="formControls.card_number.errors?.maxlength">Length must be 16 chars</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [ngClass]="{'is-invalid': submitted && formControls.security_code.errors}" formControlName="security_code" type="text"
+                 class="form-control" id="security_code" placeholder="Security code">
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.security_code.errors" class="invalid-feedback">
+          <div *ngIf="formControls.security_code.errors?.required">Security code is required</div>
+          <div *ngIf="formControls.security_code.errors?.minlength">Length must be 3 chars</div>
+          <div *ngIf="formControls.security_code.errors?.maxlength">Length must be 3 chars</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="form-field">
+          <input matInput [matDatepicker]="picker" [ngClass]="{'is-invalid': submitted && formControls.expiration.errors}"
+                 formControlName="expiration" class="form-control" id="expiration" placeholder="Expiration">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div *ngIf="submitted && formControls.expiration.errors" class="invalid-feedback">
+          <div *ngIf="formControls.expiration.errors?.required">Expiration not valid</div>
+        </div>
+      </div>
+
+    </div>
+    <button mat-raised-button color="primary">Add product</button>
+  </form>
+</section>
