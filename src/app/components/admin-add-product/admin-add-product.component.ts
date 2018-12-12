@@ -55,12 +55,8 @@ export class AdminAddProductComponent implements OnInit {
     }
 
     this.productsService.createProduct(newProduct).subscribe(
-      (next: any) => {
-        console.log(next);
-      },
-      (err: any) => {
-        console.error(err);
-      }
+      (next: any) => {/**/},
+      (err: any) => {/**/}
     );
   }
 }
