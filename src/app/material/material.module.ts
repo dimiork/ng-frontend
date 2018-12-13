@@ -21,7 +21,24 @@ import {
 
 @NgModule({
   declarations: [],
-  imports: [],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatInputModule,
+    MatCardModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRippleModule,
+    MatSnackBarModule,
+  ],
   exports: [
     CommonModule,
     FormsModule,

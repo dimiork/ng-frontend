@@ -105,7 +105,7 @@ export class AuthorizationService {
     this.authorized.next(false);
     this.user.next(null);
     this.removeToken();
-    this.notify.show('You\re successfully logged out.');
+    this.notify.show('You\'re successfully logged out.');
   }
 
   private saveToken(token: string): void {
