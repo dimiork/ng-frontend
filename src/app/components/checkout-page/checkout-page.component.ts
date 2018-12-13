@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { CartService } from '../../services/cart.service';
+import { Order } from '../../models/order';
+
 @Component({
   selector: 'app-checkout-page',
   templateUrl: './checkout-page.component.html',
@@ -10,29 +13,54 @@ export class CheckoutPageComponent implements OnInit {
   checkoutForm: FormGroup;
   submitted: boolean = false;
 
-  categories: string[];
+  order: Order = null;
+
+  objectKeys: any = Object.keys;
 
   get formControls(): {[key: string]: AbstractControl} {
     return this.checkoutForm.controls;
   }
 
-  constructor(private formBuilder: FormBuilder) {/**/}
+  get submittedAndCardErr(): boolean {
+    return !!(this.submitted && this.formControls.card_number.errors);
+  }
+
+  get submittedAndSecurityErr(): boolean {
+    return !!(this.submitted && this.formControls.security_code.errors);
+  }
+
+  get submittedAndExpirationErr(): boolean {
+    return !!(this.submitted && this.formControls.expiration.errors);
+  }
+
+  constructor(private formBuilder: FormBuilder, private cartService: CartService) {/**/}
 
   ngOnInit(): void {
     this.checkoutForm = this.formBuilder.group({
-      card_number: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
-      security_code: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
+      card_number: ['', [Validators.required, Validators.pattern(/^([0-9]){16}$/)]],
+      security_code: ['', [Validators.required, Validators.pattern(/^([0-9]){3}$/)]],
       expiration: ['', Validators.required],
     });
+
+    this.cartService.getOrder().subscribe(
+      (order: Order) => {
+        this.order = order;
+      },
+      (err: any) => {
+        this.order = null;
+      }
+    );
   }
 
   formOnSubmit(): void {
-    const newCheckout: any = this.checkoutForm.value;
-
     this.submitted = true;
-    if (this.checkoutForm.invalid) {
+    if (this.checkoutForm.invalid || !this.order) {
       return;
     }
-    // do something with newCheckout
+
+    this.cartService.createOrder(this.order).subscribe(
+      (next: any) => {/**/},
+      (err: any) => {/**/}
+    );
   }
 }
