@@ -17,7 +17,8 @@ export class MainPageComponent {
   public products$: Observable<Product[]>;
   public categories$: Observable<string[]>;
 
-  price: FormControl;
+  minPrice: FormControl;
+  maxPrice: FormControl;
   stock: FormControl;
   category: FormControl;
   filtersForm: FormGroup;
@@ -30,7 +31,8 @@ export class MainPageComponent {
     this.categories$ = this.productsService.getCategories();
 
     this.filtersForm = new FormGroup({
-      price: new FormControl(''),
+      minPrice: new FormControl(''),
+      maxPrice: new FormControl(''),
       stock: new FormControl(''),
       category: new FormControl('')
     });
@@ -40,9 +42,21 @@ export class MainPageComponent {
 
     const filter: { [key: string]: number | string } = {};
     const params: { [key: string]: number | string } = this.filtersForm.value;
+
     Object.keys(params)
       .filter((item: number | string) => params[item])
-      .forEach((item: number | string) => filter[item] = params[item]);
+      .forEach((item: number | string) => {
+        switch (item) {
+          case 'minPrice':
+            filter.price = params[item];
+            break;
+          case 'maxPrice':
+            filter.price += 'to' + params[item];
+            break;
+          default:
+            filter[item] = params[item];
+        }
+      });
 
     this.products$ = this.productsService.getAllProducts(filter);
   }
