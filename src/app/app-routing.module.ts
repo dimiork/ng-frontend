@@ -5,6 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { DisableLoginGuard } from './guards/disable-login.guard';
 import { AdminPageComponent } from './components';
 import { ProductComponent } from './components';
 
@@ -17,10 +18,10 @@ const childAdminRouts: Routes = [
 ];
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent, pathMatch: 'full' },
+  { path: '', component: MainPageComponent, pathMatch: 'full', canActivate: [ AuthGuard ] },
   { path: 'products/:id', component: ProductComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [DisableLoginGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [DisableLoginGuard] },
   { path: 'admin', component: AdminPageComponent, children: childAdminRouts },
 ];
 
