@@ -46,7 +46,6 @@ import { NotificationService } from './services/';
     AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    NotificationService
   ],
   bootstrap: [AppComponent]
 })

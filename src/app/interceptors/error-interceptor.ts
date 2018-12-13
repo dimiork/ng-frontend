@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { AuthorizationService } from '../services/authorization.service';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,10 @@ import { AuthorizationService } from '../services/authorization.service';
 
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthorizationService) {
-    //
+  constructor(
+    private authService: AuthorizationService,
+    private notify: NotificationService,
+  ) {
   }
 
   intercept(
@@ -29,6 +32,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
 
             const errToThrow: string = error.error.message || error.statusText;
+
+            this.notify.show(error.error.code || error.error.error);
 
             return throwError(errToThrow);
           })

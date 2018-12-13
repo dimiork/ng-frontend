@@ -2,19 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { Product } from '../models/product.model';
 import { ProductsFilter } from '../models/';
 import { environment } from '../../environments/environment';
 import { Category } from '../models/category';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private notify: NotificationService,
+  ) { }
 
   getAllProducts(filter?: any): Observable<Product[]> {
     if (filter) {
@@ -43,7 +47,9 @@ export class ProductsService {
   }
 
   createProduct(newProduct: Product): Observable<any> {
-    return this.httpClient.post(environment.api_url + '/products', newProduct);
+    return this.httpClient.post(environment.api_url + '/products', newProduct).pipe(
+      tap((res: any) => this.notify.show('Product created.'))
+    );
   }
 
   public getCategories(): Observable<any> {

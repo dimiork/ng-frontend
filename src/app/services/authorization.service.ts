@@ -6,6 +6,7 @@ import { Observable, BehaviorSubject, ReplaySubject, throwError, of } from 'rxjs
 import { catchError, tap, switchMap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { NotificationService } from '../services/notification.service';
 import { User, Credentials, AuthorizationResponse } from '../models/';
 
 @Injectable({
@@ -17,7 +18,10 @@ export class AuthorizationService {
   private authorized: BehaviorSubject<boolean>;
   private ready: BehaviorSubject<boolean>;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private notify: NotificationService
+  ) {
 
     this.ready = new BehaviorSubject<boolean>(false);
     this.authorized = new BehaviorSubject<boolean>(false);
@@ -55,6 +59,8 @@ export class AuthorizationService {
     if (!!response.success) {
       this.saveToken(response.token);
       this.authorized.next(true);
+      this.notify.show('Action success.');
+
     }
   }
 
@@ -99,6 +105,7 @@ export class AuthorizationService {
     this.authorized.next(false);
     this.user.next(null);
     this.removeToken();
+    this.notify.show('You\re successfully logged out.');
   }
 
   private saveToken(token: string): void {
