@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../models/category';
 import { CategoriesService } from '../../services/categories.service';
 
@@ -22,24 +22,19 @@ export class AddCategoryComponent implements OnInit {
     });
   }
 
-  get f(): any {
+  get formControls(): {[key: string]: AbstractControl} {
     return this.newCategoryForm.controls;
   }
 
   formOnSubmit(): void {
-    const formValues: FormGroup = this.newCategoryForm.value;
-
-    const newCategory: Category = {
-      title: formValues['title'],
-      description: formValues['description'],
-    };
+    const newCategory: Category = this.newCategoryForm.value;
+    console.log(newCategory);
 
     this.submitted = true;
     if (this.newCategoryForm.invalid) {
       return;
     }
 
-    console.log(newCategory);
     this.categoryService.createCategory(newCategory).subscribe(
       (next: any) => {/**/},
       (err: any) => {/**/}
