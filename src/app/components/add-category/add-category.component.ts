@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from '../../models/category';
-import { CategoriesService } from '../../services/categories.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-add-category',
@@ -12,7 +12,7 @@ export class AddCategoryComponent implements OnInit {
   newCategoryForm: FormGroup;
   submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private categoryService: CategoriesService) { /**/
+  constructor(private formBuilder: FormBuilder, private productService: ProductsService) { /**/
   }
 
   ngOnInit(): void {
@@ -28,14 +28,14 @@ export class AddCategoryComponent implements OnInit {
 
   formOnSubmit(): void {
     const newCategory: Category = this.newCategoryForm.value;
-    console.log(newCategory);
 
     this.submitted = true;
     if (this.newCategoryForm.invalid) {
       return;
     }
 
-    this.categoryService.createCategory(newCategory).subscribe(
+    console.log(newCategory);
+    this.productService.createCategory(newCategory).subscribe(
       (next: any) => {/**/},
       (err: any) => {/**/}
     );
