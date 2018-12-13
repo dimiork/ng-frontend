@@ -7,6 +7,7 @@ mat-card {
   position: absolute;
   right: 30px;
   top: 30px;
+  display: flex;
 }
 
 mat-card mat-card-title {
@@ -15,10 +16,19 @@ mat-card mat-card-title {
   color: rgba(21, 32, 81, 0.82);
 }
 
-
-
 mat-card mat-card-content div {
   margin-bottom: 10px;
   font-weight: 700;
   color: #0073d8;
+}
+
+mat-card img {
+  width: 250px;
+  margin: 0 50px 0 0;
+}
+
+.card-data-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
