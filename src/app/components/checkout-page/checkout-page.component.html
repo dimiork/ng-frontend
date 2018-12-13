@@ -1,6 +1,25 @@
 <section>
-  <div class="cart-wrapper">
-    <div class="cart">NOT IMPLEMENT</div>
+
+  <div *ngIf="order" class="cart">
+
+    <mat-card class="product" *ngFor="let key of objectKeys(order.items)">
+      <div class="img-wrapper">
+        <img class="product-thumbnail" src="{{order.items[key].product.thumbnail}}" alt="thumbnail">
+      </div>
+      <div class="product-data">
+        <div class="product-title">{{order.items[key].product.title}}</div>
+        <div class="product-category">Category: {{order.items[key].product.category_title}}</div>
+        <div class="product-price">Price: {{order.items[key].product.price}}</div>
+        <div>Count: {{order.items[key].quantity}}</div>
+      </div>
+    </mat-card>
+
+    <div class="order-data">
+      <div class="date">Date: {{order.date}}</div>
+      <div class="client-login">Username: {{order.client.login}}</div>
+      <div class="total">Total cost: {{order.total}}</div>
+    </div>
+
   </div>
 
 
@@ -9,36 +28,35 @@
 
       <div class="form-group">
         <mat-form-field class="form-field">
-          <input matInput [ngClass]="{'is-invalid': submitted && formControls.card_number.errors}" formControlName="card_number" type="text"
+          <input matInput [ngClass]="{'is-invalid': submittedAndCardErr}" formControlName="card_number" type="text"
                  class="form-control" id="card_number" placeholder="Card number">
         </mat-form-field>
-        <div *ngIf="submitted && formControls.card_number.errors" class="invalid-feedback">
+        <div *ngIf="submittedAndCardErr" class="invalid-feedback">
           <div *ngIf="formControls.card_number.errors?.required">Product title is required</div>
-          <div *ngIf="formControls.card_number.errors?.minlength">Length must be 16 chars</div>
-          <div *ngIf="formControls.card_number.errors?.maxlength">Length must be 16 chars</div>
+          <div *ngIf="formControls.card_number.errors?.pattern">Length must be 16 char and it must be numbers</div>
         </div>
       </div>
 
       <div class="form-group">
         <mat-form-field class="form-field">
-          <input matInput [ngClass]="{'is-invalid': submitted && formControls.security_code.errors}" formControlName="security_code" type="text"
+          <input matInput [ngClass]="{'is-invalid': submittedAndSecurityErr}" formControlName="security_code"
+                 type="text"
                  class="form-control" id="security_code" placeholder="Security code">
         </mat-form-field>
-        <div *ngIf="submitted && formControls.security_code.errors" class="invalid-feedback">
+        <div *ngIf="submittedAndSecurityErr" class="invalid-feedback">
           <div *ngIf="formControls.security_code.errors?.required">Security code is required</div>
-          <div *ngIf="formControls.security_code.errors?.minlength">Length must be 3 chars</div>
-          <div *ngIf="formControls.security_code.errors?.maxlength">Length must be 3 chars</div>
+          <div *ngIf="formControls.security_code.errors?.pattern">Length must be 3 char and it must be numbers</div>
         </div>
       </div>
 
       <div class="form-group">
         <mat-form-field class="form-field">
-          <input matInput [matDatepicker]="picker" [ngClass]="{'is-invalid': submitted && formControls.expiration.errors}"
+          <input matInput [matDatepicker]="picker" [ngClass]="{'is-invalid': submittedAndExpirationErr}"
                  formControlName="expiration" class="form-control" id="expiration" placeholder="Expiration">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <div *ngIf="submitted && formControls.expiration.errors" class="invalid-feedback">
+        <div *ngIf="submittedAndExpirationErr" class="invalid-feedback">
           <div *ngIf="formControls.expiration.errors?.required">Expiration not valid</div>
         </div>
       </div>

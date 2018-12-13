@@ -11,3 +11,25 @@
   color: red;
   font-size: 12px;
 }
+
+.product {
+  margin: 10px;
+  display: flex;
+}
+
+.product-thumbnail {
+  margin-right: 20px;
+  width: 100px;
+}
+
+.order-data {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.product-data {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
