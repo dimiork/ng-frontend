@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Category } from '../../models/category';
 import { ProductsService } from '../../services/products.service';
 
@@ -26,6 +27,14 @@ export class AddCategoryComponent implements OnInit {
     return this.newCategoryForm.controls;
   }
 
+  get submittedAndTitleErr(): boolean {
+    return !!(this.submitted && this.formControls.title.errors);
+  }
+
+  get submittedAndDescriptionErr(): boolean {
+    return !!(this.submitted && this.formControls.description.errors);
+  }
+
   formOnSubmit(): void {
     const newCategory: Category = this.newCategoryForm.value;
 
@@ -34,7 +43,6 @@ export class AddCategoryComponent implements OnInit {
       return;
     }
 
-    console.log(newCategory);
     this.productService.createCategory(newCategory).subscribe(
       (next: any) => {/**/},
       (err: any) => {/**/}

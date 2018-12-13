@@ -5,10 +5,10 @@
 
       <div class="form-group">
         <mat-form-field class="form-field">
-          <input matInput [ngClass]="{'is-invalid': submitted && formControls.title.errors}" formControlName="title" type="text"
+          <input matInput [ngClass]="{'is-invalid': submittedAndTitleErr}" formControlName="title" type="text"
                  class="form-control" id="title" placeholder="Category title">
         </mat-form-field>
-        <div *ngIf="submitted && formControls.title.errors" class="invalid-feedback">
+        <div *ngIf="submittedAndTitleErr" class="invalid-feedback">
           <div *ngIf="formControls.title.errors.required">Category title is required</div>
           <div *ngIf="formControls.title.errors.minlength">Min length is 3 char</div>
         </div>
@@ -16,10 +16,10 @@
 
       <div class="form-group">
         <mat-form-field class="form-field">
-          <input matInput [ngClass]="{'is-invalid': submitted && formControls.description.errors}" formControlName="description" type="text"
+          <input matInput [ngClass]="{'is-invalid': submittedAndDescriptionErr}" formControlName="description" type="text"
                  class="form-control" id="description" placeholder="Description">
         </mat-form-field>
-        <div *ngIf="submitted && formControls.description.errors" class="invalid-feedback">
+        <div *ngIf="submittedAndDescriptionErr" class="invalid-feedback">
           <div *ngIf="formControls.description.errors.maxlength">Max length is 255 char</div>
         </div>
       </div>
