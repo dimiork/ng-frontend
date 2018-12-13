@@ -6,14 +6,14 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DisableLoginGuard } from './guards/disable-login.guard';
-import { AdminPageComponent } from './components';
+import { AddCategoryComponent, AdminAddProductComponent, AdminPageComponent } from './components';
 import { ProductComponent } from './components';
 
 const childAdminRouts: Routes = [
   { path: '', redirectTo: 'statistics', pathMatch: 'full' },
   { path: 'statistics', component: MainPageComponent }, // todo replace MainPageComponent
-  { path: 'category', component: MainPageComponent }, // todo replace MainPageComponent
-  { path: 'product', component: MainPageComponent }, // todo replace MainPageComponent
+  { path: 'category', component: AddCategoryComponent },
+  { path: 'product', component: AdminAddProductComponent },
   { path: '**', redirectTo: 'statistics', pathMatch: 'full' }
 ];
 
