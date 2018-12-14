@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { NotificationService } from '../services/notification.service';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,17 @@ export class WishlistService {
   ) { }
 
   getWishlist(): Observable<any> {
+
     return this.http.get<any>(this.wishlistUrl);
   }
 
-  getWishlistById(id: string): Observable<any> {
-    return this.http.get<any>(this.wishlistUrl + '/' + id);
+  getWishlistById(id: string): Observable<Product[]> {
+
+    return this.http.get<Product[]>(this.wishlistUrl + '/' + id).pipe(
+      map((res: any) => {
+        return res.wishlist.items;
+      })
+    );
   }
 
   creatWishlist(newWishlist: any): Observable<any> {

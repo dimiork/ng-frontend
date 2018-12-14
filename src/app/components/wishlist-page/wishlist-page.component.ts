@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { mergeMap } from 'rxjs/operators';
+
+import { Observable, of } from 'rxjs';
+import { mergeMap, switchMap } from 'rxjs/operators';
 
 import { WishlistService } from '../../services/wishlist.service';
 import { Product } from 'src/app/models/product.model';
@@ -13,17 +15,18 @@ import { User } from 'src/app/models/user';
 })
 export class WishlistPageComponent implements OnInit {
 
-  products: Product[];
+  products$: Observable<Product[]>;
 
-  id: string;
-
-  constructor( private wishlistService: WishlistService,
-    private authorizationService: AuthorizationService ) {}
+  constructor(
+    private wishlistService: WishlistService,
+    private authorizationService: AuthorizationService
+  ) {}
 
   ngOnInit(): void {
-    this.authorizationService.getUser()
-    .pipe(mergeMap((response: User) => this.wishlistService.getWishlistById(response.id)))
-    .subscribe( (data: Product[]) => this.products = data);
+    this.authorizationService.getUser().subscribe((user: any) => {
+      if (user && user.id) {
+        this.products$ = this.wishlistService.getWishlistById(user.id);
+      }
+    });
   }
-
 }
