@@ -1,3 +1,14 @@
+mat-card {
+  width: 30%;
+  margin: auto;
+}
+
+.heart {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+
 mat-card mat-card-title {
   font-size: 45px;
   font-weight: 700;

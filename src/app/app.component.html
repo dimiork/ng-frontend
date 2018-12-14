@@ -1,5 +1,6 @@
-<div *ngIf="( isReady | async )">
-  <app-header></app-header>
+<div *ngIf="isReady">
+<!-- <div *ngIf="( isReady | async )"> -->
+  <app-header [products]="products"></app-header>
 
   <router-outlet></router-outlet>
 </div>

@@ -24,6 +24,16 @@
   <div class="products" *ngIf="(products$ | async) else preloader">
     <mat-card class="product" *ngFor="let product of products$ | async" routerLink="products/{{product.id}}">
       <mat-card-header class="product__header">
+
+          <div (click)="addOrRemoveProduct(product)" class="heart">
+              <i *ngIf="isFavorite(product)" class="material-icons">
+                favorite
+              </i>
+              <i *ngIf="!isFavorite(product)" class="material-icons">
+                favorite_border
+              </i>
+            </div>
+        
         <mat-card-title class="product__title">{{ product.title }}</mat-card-title>
         <mat-card-subtitle class="product__price">Price: {{ product.price }}</mat-card-subtitle>
       </mat-card-header>
