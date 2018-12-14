@@ -9,7 +9,6 @@ import { DisableLoginGuard } from './guards/disable-login.guard';
 import { AddCategoryComponent, AdminAddProductComponent, AdminPageComponent } from './components';
 import { ProductComponent } from './components';
 import { WishlistPageComponent } from './components/wishlist-page/wishlist-page.component';
-import { AdminPageComponent } from './components';
 import { StatisticsPageComponent } from './components/';
 
 const childAdminRouts: Routes = [
@@ -23,6 +22,7 @@ const childAdminRouts: Routes = [
 const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full', canActivate: [ AuthGuard ] },
   { path: 'products/:id', component: ProductComponent},
+  { path: 'wishlist', component: WishlistPageComponent },
   { path: 'login', component: LoginComponent, canActivate: [DisableLoginGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [DisableLoginGuard] },
   { path: 'admin', component: AdminPageComponent, children: childAdminRouts },

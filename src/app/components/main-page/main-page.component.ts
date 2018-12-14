@@ -6,13 +6,17 @@ import { Observable } from 'rxjs';
 import { ProductsService } from '../../services/products.service';
 // import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model';
+import { WishlistService } from 'src/app/services/wishlist.service';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { User } from 'src/app/models/user';
+import { Wishlist } from 'src/app/models/wishlist.model';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
 
   public products$: Observable<Product[]>;
   public categories$: Observable<string[]>;
@@ -23,8 +27,19 @@ export class MainPageComponent {
   category: FormControl;
   filtersForm: FormGroup;
 
+  id: string;
+
+  idProduct: string;
+  user: User;
+  productsList: Product[];
+  updateWishlist: Wishlist;
+
+  index: number = null;
+
   constructor(
     private productsService: ProductsService,
+    private wishlistService: WishlistService,
+    private authorizationService: AuthorizationService,
     // private orderService: OrderService,
   ) {
     this.products$ = this.productsService.getAllProducts();
@@ -36,6 +51,16 @@ export class MainPageComponent {
       stock: new FormControl(''),
       category: new FormControl('')
     });
+  }
+
+  ngOnInit(): void {
+
+    this.authorizationService.getUser()
+    .subscribe( (resp: User) => this.user = resp);
+
+    this.wishlistService.getWishlistSubject()
+      .subscribe((data: any) => this.productsList = data);
+
   }
 
   public getFilteredProducts(): void {
@@ -71,10 +96,59 @@ export class MainPageComponent {
     this.products$ = this.productsService.getAllProducts();
   }
 
-  public onAddToCart(product: Product, evt: any): void {
+  public onAddToCart(product: Product, evt: Event): void {
     if (evt && product) {
       evt.stopPropagation();
       // this.orderService.createOrder(product);
+    }
+  }
+
+  isFavorite (product: Product): boolean {
+    if (!this.productsList) {
+      return false;
+    }
+
+    return (this.searchIndex(product) === 0 || this.searchIndex(product) > 0);
+  }
+
+  setUpdateWishlist(): void {
+
+    this.updateWishlist = {
+      client: this.user,
+      id: this.user.id,
+      items: this.productsList
+    };
+
+    this.wishlistService.updateWishlist(this.user.id, this.updateWishlist)
+      .subscribe( () => console.log('wishlist update'));
+
+  }
+
+  searchIndex(product: Product): any {
+
+    for (let i: number = 0; i < this.productsList.length; i++) {
+      if (this.productsList[i].id === product.id) {
+
+        return i;
+      }
+    }
+
+    return false;
+
+  }
+
+  addOrRemoveProduct(product: Product): any  {
+
+    if (!this.productsList) {
+      return false;
+    }
+
+    if (!this.isFavorite(product)) {
+      this.productsList.push(product);
+      this.setUpdateWishlist();
+    } else {
+      this.productsList.splice( this.searchIndex(product), 1 );
+      this.setUpdateWishlist();
     }
   }
 

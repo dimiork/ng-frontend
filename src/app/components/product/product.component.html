@@ -1,7 +1,17 @@
+<h1>Product</h1>
 <section>
 
   <mat-card *ngIf="product else preloader">
     <mat-card-header>
+        <div (click)="addOrRemoveProduct()" class="heart">
+            <i *ngIf="isFavorite()" class="material-icons">
+              favorite
+            </i>
+            <i *ngIf="!isFavorite()" class="material-icons">
+              favorite_border
+            </i>
+          </div>
+      <mat-card-title>{{product.title}}</mat-card-title>
       <mat-card-title>{{product.title}}</mat-card-title>
     </mat-card-header>
     <img mat-card-image src={{product.thumbnail}} alt="Product image">
