@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AdminPageComponent } from './components';
 import { AdminAddProductComponent } from './components';
 import { AddCategoryComponent } from './components';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 import { NotificationService } from './services/';
 
@@ -33,6 +34,7 @@ import { NotificationService } from './services/';
     AdminPageComponent,
     AdminAddProductComponent,
     AddCategoryComponent
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
