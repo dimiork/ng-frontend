@@ -25,6 +25,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotificationService } from './services/';
 import { StatisticsPageComponent } from './components/';
 import { CheckoutPageComponent } from './components';
+import { WeRecommendComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CheckoutPageComponent } from './components';
     SpinnerComponent,
     StatisticsPageComponent,
     CheckoutPageComponent
+    WeRecommendComponent
   ],
   imports: [
     BrowserModule,
