@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Product } from '../../models/product.model';
@@ -24,14 +24,20 @@ export class ProductComponent implements OnInit {
   user: User;
   products: Product[];
   updateWishlist: Wishlist;
+  @ViewChild('slide') slide: ElementRef;
+  carouselItems: Product[];
+  position: number = 0;
+  animationContinues: boolean = false;
 
   constructor(
     private productsService: ProductsService,
     private wishlistService: WishlistService,
     private authorizationService: AuthorizationService,
     private activateRoute: ActivatedRoute,
-    private notify: NotificationService
-    ) {
+    private notify: NotificationService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef
+  ) {
     const arrLength: number = this.activateRoute.url['value'].length;
     this.id = this.activateRoute.url['value'][arrLength - 1].path;
   }
@@ -45,6 +51,66 @@ export class ProductComponent implements OnInit {
       (err: any) => {
         this.notify.show(err);
       }
+    );
+
+    this.productsService.getAllProducts().subscribe(
+      (products: Product[]) => {
+        this.carouselItems = products;
+      },
+      (err: any) => {/**/}
+    );
+  }
+
+  positionAnimation(direction: number): void {
+    const animationSpeed: number = 10;
+    const shift: number = 150;
+    const fps: number = 50;
+    const position: number = parseInt(this.slide.nativeElement.style.left, 10);
+
+    if (this.animationContinues) {
+      return;
+    }
+
+    this.animationContinues = true;
+
+    const timer: number = setInterval(() => {
+
+      if (direction === -1) {
+        if (this.position >= position + shift) {
+          clearInterval(timer);
+          this.animationContinues = false;
+        } else {
+          this.position += animationSpeed;
+        }
+      }
+
+      if (direction === 1) {
+        if (this.position <= position - shift) {
+          clearInterval(timer);
+          this.animationContinues = false;
+        } else {
+          this.position -= animationSpeed;
+        }
+      }
+
+    }, 1000 / fps);
+  }
+
+  prev(): void {
+    this.positionAnimation(1);
+  }
+
+  next(): void {
+    this.positionAnimation(-1);
+  }
+
+  linkClick(id: string): void {
+    this.id = id;
+    this.productsService.getProductById(this.id).subscribe(
+      (product: Product) => {
+        this.product = product;
+      },
+      (err: any) => {/**/}
     );
 
     this.wishlistService.getWishlistSubject()

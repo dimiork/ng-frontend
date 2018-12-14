@@ -26,11 +26,33 @@
       </mat-card-content>
     </div>
 
-    <div class="carousel">
+  </mat-card>
 
+
+  <div class="we-recommend">
+    <h2>We recommended</h2>
+    <div class="carousel">
+      <div class="carousel-body">
+        <div class="for-slide" [ngStyle]="{'left':position + 'px'}" #slide>
+          <ng-container *ngIf="carouselItems?.length > 0">
+            <div *ngFor="let product of carouselItems" class="carousel-item">
+              <a (click)="linkClick(product.id)" routerLink="../{{product.id}}">
+                <div class="title">{{product.title}}</div>
+                <div class="price">Price: {{product.price}}</div>
+                <div class="thumbnail">
+                  <img src="{{product.thumbnail}}" alt="thumbnail">
+                </div>
+              </a>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <button (click)="prev()" class="btn-prev" mat-raised-button color="primary">Prev</button>
+      <button (click)="next()" class="btn-next" mat-raised-button color="primary">Next</button>
     </div>
 
-  </mat-card>
+  </div>
+
 
 </section>
 
