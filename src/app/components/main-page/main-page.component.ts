@@ -63,8 +63,6 @@ export class MainPageComponent {
           return acc;
         }, Object.create(null));
 
-    console.log(filter);
-
     this.products$ = this.productsService.getAllProducts(filter);
   }
 
