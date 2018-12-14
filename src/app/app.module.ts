@@ -41,7 +41,7 @@ import { WeRecommendComponent } from './components';
     AddCategoryComponent,
     SpinnerComponent,
     StatisticsPageComponent,
-    CheckoutPageComponent
+    CheckoutPageComponent,
     WeRecommendComponent
   ],
   imports: [
