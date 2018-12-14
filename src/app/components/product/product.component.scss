@@ -32,3 +32,53 @@ mat-card img {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.carousel {
+  position: relative;
+}
+
+.carousel-body {
+  width: 80%;
+  overflow: hidden;
+  margin: auto;
+}
+
+.for-slide {
+  display: inline-flex;
+  position: relative;
+}
+
+.thumbnail img {
+  width: 150px;
+}
+
+.carousel-item {
+  margin: 10px;
+  width: 150px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.carousel-item:hover {
+  opacity: 1;
+}
+
+.btn-prev,
+.btn-next {
+  position: absolute;
+  top: 70px;
+}
+
+.btn-prev {
+  left: 0;
+}
+
+.btn-next {
+  right: 0;
+}
+
+.we-recommend a {
+  text-decoration: initial;
+  color: initial;
+}
+
