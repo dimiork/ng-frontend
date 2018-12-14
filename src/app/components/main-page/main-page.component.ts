@@ -40,23 +40,30 @@ export class MainPageComponent {
 
   public getFilteredProducts(): void {
 
-    const filter: { [key: string]: number | string } = {};
-    const params: { [key: string]: number | string } = this.filtersForm.value;
+    const filter: { [key: string]: number | string } = Object.entries(this.filtersForm.value)
+        .filter((item: [ string, number | string ]) => item[1])
+        .reduce((acc: any, current: any) => {
+          switch (current[0]) {
+            case 'minPrice':
+              acc['price'] ?
+                acc['price'] = current[1] + acc['price'] :
+                acc['price'] = current[1];
+              break;
 
-    Object.keys(params)
-      .filter((item: number | string) => params[item])
-      .forEach((item: number | string) => {
-        switch (item) {
-          case 'minPrice':
-            filter.price = params[item];
-            break;
-          case 'maxPrice':
-            filter.price += 'to' + params[item];
-            break;
-          default:
-            filter[item] = params[item];
-        }
-      });
+            case 'maxPrice':
+              acc['price'] ?
+                acc['price'] += 'to' + current[1] :
+                acc['price'] = 'to' + current[1];
+              break;
+
+            default:
+              acc[current[0]] = current[1];
+          }
+
+          return acc;
+        }, Object.create(null));
+
+    console.log(filter);
 
     this.products$ = this.productsService.getAllProducts(filter);
   }
