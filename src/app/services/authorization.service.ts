@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { RequestOptions } from '@angular/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable, BehaviorSubject, ReplaySubject, throwError, of } from 'rxjs';
-import { catchError, tap, switchMap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { NotificationService } from '../services/notification.service';
@@ -14,51 +13,57 @@ import { User, Credentials, AuthorizationResponse } from '../models/';
 })
 export class AuthorizationService {
 
-  private user: BehaviorSubject<User | null>;
-  private authorized: BehaviorSubject<boolean>;
-  private ready: BehaviorSubject<boolean>;
+  private user$: BehaviorSubject<User | null>;
+  private ready$: BehaviorSubject<boolean>;
 
   constructor(
     private http: HttpClient,
     private notify: NotificationService
   ) {
 
-    this.ready = new BehaviorSubject<boolean>(false);
-    this.authorized = new BehaviorSubject<boolean>(false);
-    this.user = new BehaviorSubject<User | null>(null);
+    this.ready$ = new BehaviorSubject<boolean>(false);
+    this.user$ = new BehaviorSubject<User | null>(null);
+
   }
 
   // using for prevent app rendering untill user token is validated
   public isReady(): Observable<boolean> {
     if (!this.getToken()) {
-      this.ready.next(true);
+      this.ready$.next(true);
+    } else {
+      this.fetchUser();
     }
 
-    return this.ready.asObservable();
+    return this.ready$.asObservable();
   }
 
   public isAuthorized(): Observable<boolean> {
-    if (!this.authorized.getValue() && this.getToken()) {
-        return this.fetchUser().pipe(
-          switchMap((user: User) => {
 
-            return of(true);
-          })
-        );
-    }
+    return this.user$.asObservable().pipe(
+      map((user: User) => {
+        if (user) {
 
-      return this.authorized.asObservable();
+          return true;
+        }
+
+        return false;
+      })
+    );
   }
 
-  public getUser(): Observable<User> {
+  public getUser(): Observable<User | null> {
 
-    return this.user.asObservable();
+    if (!!this.getToken() && !this.user$.getValue()) {
+      this.fetchUser();
+    }
+
+    return this.user$.asObservable();
   }
 
   private authResponseHandler(response: AuthorizationResponse): void {
     if (!!response.success) {
       this.saveToken(response.token);
-      this.authorized.next(true);
+      this.getUser();
       this.notify.show('Action success.');
 
     }
@@ -66,44 +71,53 @@ export class AuthorizationService {
 
   public login(credentials: Credentials): Observable<AuthorizationResponse> {
 
-    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/login`, credentials).pipe(
+    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/login`, credentials)
+      .pipe(
+        tap((response: AuthorizationResponse) => {
+          this.authResponseHandler(response);
+        }),
+        catchError((error: HttpErrorResponse) => {
 
-      tap((response: AuthorizationResponse) => {
-        this.authResponseHandler(response);
-      }),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
-    );
+          return throwError(error);
+        })
+      );
   }
 
   public register(credentials: Credentials): Observable<AuthorizationResponse> {
 
-    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/auth`, credentials).pipe(
-      tap((response: AuthorizationResponse) => {
-        this.authResponseHandler(response);
-      }),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
+    return this.http.post<AuthorizationResponse>(`${ environment.api_url }/auth`, credentials)
+      .pipe(
+        tap((response: AuthorizationResponse) => {
+          this.authResponseHandler(response);
+        }),
+        catchError((error: HttpErrorResponse) => {
+
+          return throwError(error);
+        })
     );
   }
 
-  private fetchUser (): Observable<User> {
+  public fetchUser(): Promise<User> {
 
-    return this.http.get<User>(`${ environment.api_url }/user`).pipe(
-      tap((res: User) => {
-        this.authorized.next(true);
-        this.user.next(res);
-        this.ready.next(true);
-      })
-    );
+    return new Promise((resolve: any, reject: any): Promise<User> => {
+      const response: Promise<User> = this.http.get<User>(`${ environment.api_url }/user`)
+        .toPromise()
+        .then((user: User) => {
+          if (user) {
+            this.ready$.next(true);
+            this.user$.next(user);
+          }
+
+          return user;
+        });
+
+      return response;
+    });
   }
 
   public logout (): void {
 
-    this.authorized.next(false);
-    this.user.next(null);
+    this.user$.next(null);
     this.removeToken();
     this.notify.show('You\'re successfully logged out.');
   }

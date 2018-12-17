@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { tap } from 'rxjs/operators';
+
+import { Observable } from 'rxjs';
 
 import { AuthorizationService } from './services/authorization.service';
 
@@ -10,16 +11,11 @@ import { AuthorizationService } from './services/authorization.service';
 })
 export class AppComponent {
   title: string = 'ng-frontend';
-  isReady: boolean;
+  isReady: Observable<boolean>;
 
   constructor(private authService: AuthorizationService) {
 
-    this.authService.isReady().pipe(
-      tap((state: boolean) => {
-        this.isReady = state;
-      })
-    ).subscribe();
-
+    this.isReady = this.authService.isReady();
  }
 
 }

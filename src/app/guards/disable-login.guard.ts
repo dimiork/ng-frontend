@@ -18,12 +18,21 @@ export class DisableLoginGuard implements CanActivate {
   ) {
 
     this.authService.isAuthorized()
-      .subscribe((answer: any) => {
-        this.userIsLogin = answer;
-      });
+    .subscribe((isPermitted: any) => {
+      if (!!isPermitted) {
+        this.userIsLogin = false;
+        this.router.navigate(['']);
+
+        return;
+      }
+      this.userIsLogin = true;
+      this.router.navigate(['login']);
+
+    });
   }
 
   canActivate(): Observable<boolean> | boolean {
-    return !this.userIsLogin;
+
+    return this.userIsLogin;
   }
 }
