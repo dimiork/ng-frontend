@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Product } from '../../models/product.model';
-import { ProductsService } from '../../services/products.service';
+import { ProductsService, NotificationService } from '../../services/';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +14,11 @@ export class ProductComponent implements OnInit {
 
   id: string;
 
-  constructor(private productsService: ProductsService, private activateRoute: ActivatedRoute) {
+  constructor(
+    private productsService: ProductsService,
+    private activateRoute: ActivatedRoute,
+    private notify: NotificationService
+  ) {
     const arrLength: number = this.activateRoute.url['value'].length;
     this.id = this.activateRoute.url['value'][arrLength - 1].path;
   }
@@ -25,7 +29,7 @@ export class ProductComponent implements OnInit {
         this.product = product;
       },
       (err: any) => {
-        console.log(err);
+        this.notify.show(err);
       }
     );
   }

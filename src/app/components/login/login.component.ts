@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { AuthorizationService } from '../../services/authorization.service';
+import { AuthorizationService, NotificationService } from '../../services/';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,8 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthorizationService,
-    private router: Router
+    private router: Router,
+    private notify: NotificationService
     ) { }
 
   loginUser(): void {
@@ -26,11 +27,10 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value)
     .subscribe(
       (res: any) => {
-        console.log('Succes');
         this.router.navigate(['']);
       },
       (err: any) => {
-        alert('User not found');
+        this.notify.show(err);
       });
   }
 
