@@ -3,4 +3,4 @@ export * from './admin-page/admin-page.component';
 export * from './product/product.component';
 export * from './admin-add-product/admin-add-product.component';
 export * from './add-category/add-category.component';
-export { StatisticsPageComponent } from '../components/statistics-page/statistics-page.component';
+export { StatisticsPageComponent } from './statistics-page/statistics-page.component';
