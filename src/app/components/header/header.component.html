@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="isAuthorized()" color="primary">
+<mat-toolbar *ngIf="(isAuthorized$ | async)" color="primary">
 
     <mat-toolbar-row>
       <span>
@@ -22,7 +22,7 @@
   
   </mat-toolbar>
   
-  <mat-toolbar *ngIf="!isAuthorized()" color="primary">
+  <mat-toolbar *ngIf="!(isAuthorized$ | async)" color="primary">
   
       <mat-toolbar-row>
   

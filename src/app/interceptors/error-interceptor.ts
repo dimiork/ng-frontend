@@ -16,24 +16,21 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private authService: AuthorizationService,
     private notify: NotificationService,
-  ) {
-  }
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler): Observable<HttpEvent<any>> {
-
     return next.handle(request)
       .pipe(
         catchError(
           (error: any) => {
+            const errToThrow: string = error.error.message || error.statusText;
             if (error.status === 401) {
               this.authService.logout();
+            } else {
+              this.notify.show(error.error.code || error.error.error);
             }
-
-            const errToThrow: string = error.error.message || error.statusText;
-
-            this.notify.show(error.error.code || error.error.error);
 
             return throwError(errToThrow);
           })

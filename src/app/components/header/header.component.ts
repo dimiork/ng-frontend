@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthorizationService } from '../../services/authorization.service';
 import { User } from '../../models/';
+
+import { Observable } from 'rxjs';
+
+import { User } from '../../models/user';
+import { AuthorizationService } from '../../services/';
 
 @Component({
   selector: 'app-header',
@@ -14,17 +18,17 @@ import { User } from '../../models/';
 })
 export class HeaderComponent {
 
-  user$: Observable<User>;
+  public isAuthorized$: Observable<boolean>;
+  public user$: Observable<User | null>;
 
-  constructor (
-    private router: Router,
-    private authService: AuthorizationService,
-  ) {
+  constructor (private authService: AuthorizationService) {
+
+    this.isAuthorized$ = this.authService.isAuthorized();
     this.user$ = this.authService.getUser();
   }
 
-  isAuthorized(): boolean {
-    return !!localStorage.getItem('token');
+  logout(): void {
+    this.authService.logout();
   }
 
   logout(): void {
