@@ -44,7 +44,7 @@ export class WishlistService {
   }
 
   updateWishlist(id: string, update: any): Observable<any> {
-    
+
     return this.http.put<any>(this.wishlistUrl + '/' + id, update).pipe(
       tap((res: any) => this.notify.show('Wishlist updated.'))
     );
