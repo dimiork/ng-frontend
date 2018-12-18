@@ -9,7 +9,7 @@ import { DisableLoginGuard } from './guards/disable-login.guard';
 import { AddCategoryComponent, AdminAddProductComponent, AdminPageComponent } from './components';
 import { ProductComponent } from './components';
 import { WishlistPageComponent } from './components/wishlist-page/wishlist-page.component';
-import { StatisticsPageComponent } from './components/';
+import { StatisticsPageComponent, CheckoutPageComponent } from './components/';
 
 const childAdminRouts: Routes = [
   { path: '', redirectTo: 'statistics', pathMatch: 'full' },
@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [DisableLoginGuard] },
   { path: 'admin', component: AdminPageComponent, children: childAdminRouts },
   { path: 'wishes', component: WishlistPageComponent, canActivate: [ AuthGuard ] },
+  { path: 'checkout', component: CheckoutPageComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule({
