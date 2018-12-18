@@ -1,6 +1,10 @@
 mat-card {
-  width: 30%;
-  margin: auto;
+  margin: 10px auto auto;
+  display: flex;
+}
+
+.img-wrapper {
+  position: relative;
 }
 
 .heart {
@@ -8,6 +12,10 @@ mat-card {
   right: 30px;
   top: 30px;
   display: flex;
+}
+
+.card-data-wrapper {
+  margin-left: 16px;
 }
 
 mat-card mat-card-title {
@@ -24,7 +32,7 @@ mat-card mat-card-content div {
 
 mat-card img {
   width: 250px;
-  margin: 0 50px 0 0;
+  margin: 0 20px 0 0;
 }
 
 .card-data-wrapper {

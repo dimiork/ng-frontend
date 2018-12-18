@@ -1,5 +1,14 @@
+.we-recommend {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  color: #152051d1;
+}
+
 .carousel {
   position: relative;
+}
+
+.carousel-item {
+  cursor: pointer;
 }
 
 .carousel-body {
@@ -10,28 +19,40 @@
 
 .for-slide {
   display: inline-flex;
+  align-items: flex-start;
   position: relative;
+  height: 350px;
+}
+
+
+.thumbnail {
+  width: 150px;
+  height: 150px;
 }
 
 .thumbnail img {
-  width: 150px;
+  display: block;
+  max-width:100%;
+  max-height:100%;
+  width: auto;
+  height: auto;
+  margin: auto;
 }
 
 .carousel-item {
   margin: 10px;
   width: 150px;
   text-align: center;
-  opacity: 0.7;
 }
 
 .carousel-item:hover {
-  opacity: 1;
+  filter: contrast(1.2);
 }
 
 .btn-prev,
 .btn-next {
   position: absolute;
-  top: 70px;
+  top: 120px;
 }
 
 .btn-prev {
@@ -47,3 +68,6 @@
   color: initial;
 }
 
+.we-recommend h2 {
+  text-align: center;
+}
