@@ -1,29 +1,29 @@
-<h1>Product</h1>
 <section>
 
   <mat-card *ngIf="product else preloader">
     <div class="img-wrapper">
       <img mat-card-image src={{product.thumbnail}} alt="Product image">
+      <div (click)="addOrRemoveProduct()" class="heart">
+        <i *ngIf="isFavorite()" class="material-icons">
+          favorite
+        </i>
+        <i *ngIf="!isFavorite()" class="material-icons">
+          favorite_border
+        </i>
+      </div>
     </div>
-    <mat-card-header>
-        <div (click)="addOrRemoveProduct()" class="heart">
-            <i *ngIf="isFavorite()" class="material-icons">
-              favorite
-            </i>
-            <i *ngIf="!isFavorite()" class="material-icons">
-              favorite_border
-            </i>
-        </div>
-      <mat-card-title>{{product.title}}</mat-card-title>
-      <mat-card-title>{{product.title}}</mat-card-title>
-    </mat-card-header>
-    <div class="card-data-wrapper">
-      <mat-card-content>
-        <div class="description">{{product.description}}</div>
-        <div>Category title: {{product.category_title}}</div>
-        <div>Price: {{product.price}}</div>
-        <div>Stock: {{product.stock}}</div>
-      </mat-card-content>
+    <div>
+      <mat-card-header>
+        <mat-card-title>{{product.title}}</mat-card-title>
+      </mat-card-header>
+      <div class="card-data-wrapper">
+        <mat-card-content>
+          <div>Category: {{product.category_title}}</div>
+          <div>Price: {{product.price}}</div>
+          <div>Stock: {{product.stock}}</div>
+          <div class="description">{{product.description}}</div>
+        </mat-card-content>
+      </div>
     </div>
 
   </mat-card>

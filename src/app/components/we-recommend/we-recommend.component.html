@@ -8,11 +8,12 @@
           <ng-container *ngIf="carouselItems?.length > 0">
             <div *ngFor="let product of carouselItems" class="carousel-item">
               <div (click)="clickOnProduct(product.id)">
-                <div class="title">{{product.title}}</div>
-                <div class="price">Price: {{product.price}}</div>
+                <h4 class="title">{{product.title}}</h4>
                 <div class="thumbnail">
                   <img src="{{product.thumbnail}}" alt="thumbnail">
                 </div>
+                <div class="price">Price: {{product.price}}</div>
+                <div class="category">Category: {{product.category_title}}</div>
               </div>
             </div>
           </ng-container>

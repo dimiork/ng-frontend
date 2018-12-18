@@ -63,14 +63,14 @@ export class WeRecommendComponent implements OnInit {
   }
 
   prev(): void {
-    this.positionAnimation(1);
-  }
-
-  next(): void {
     this.positionAnimation(-1);
   }
 
+  next(): void {
+    this.positionAnimation(1);
+  }
+
   clickOnProduct(id: string): void {
-   this.changed.emit(id);
+    this.changed.emit(id);
   }
 }
