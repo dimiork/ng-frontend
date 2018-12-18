@@ -39,7 +39,7 @@ import { CheckoutPageComponent } from './components';
     AdminAddProductComponent,
     AddCategoryComponent,
     SpinnerComponent,
-    StatisticsPageComponent
+    StatisticsPageComponent,
     CheckoutPageComponent
   ],
   imports: [
