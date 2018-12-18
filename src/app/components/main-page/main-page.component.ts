@@ -120,7 +120,7 @@ export class MainPageComponent implements OnInit {
     };
 
     this.wishlistService.updateWishlist(this.user.id, this.updateWishlist)
-      .subscribe( () => console.log('wishlist update'));
+      .subscribe();
 
   }
 

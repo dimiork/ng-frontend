@@ -59,14 +59,13 @@ export class AppComponent {
     .subscribe( (data: any) => this.products = data,
     (err: any) => {
       if (err === 'Not Found') {
-        console.log('err');
         this.wishlist = {
           client: this.user,
           id: this.user.id,
           items: []
         };
       this.wishlistService.creatWishlist(this.wishlist)
-        .subscribe( () => console.log('wishlist creat'));
+        .subscribe();
       this.wishlistService.setWishlistSubject(this.wishlist);
     }
     this.notify.show(err);
