@@ -1,46 +1,53 @@
 h1 {
-    text-align: center;
-    margin: 30px 0;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .card {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-  }
-  
-  .more-button {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-  }
-  
-  .card-content {
-    text-align: left;
-  }
-  
-  i {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  
-  mat-card-title {
-    height: 100%;
-    width: 100%;
-  }
-  
-  img {
-    width: 50%;
-    float: left;
-  }
-  .items {
-    padding-left: 55%;
-  }
+  text-align: center;
+  margin: 30px 0;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card {
+  width: 90%;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+.card-content {
+  display: flex;
+}
+
+.img-and-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 160px;
+}
+
+.img-wrapper {
+  width: 100px;
+  height: 100px;
+}
+
+.card-content img {
+  display: block;
+  max-width:100%;
+  max-height:100%;
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+.items {
+  padding-left: 10%;
+}
