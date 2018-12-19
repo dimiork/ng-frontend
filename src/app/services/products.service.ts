@@ -41,7 +41,7 @@ export class ProductsService {
   }
 
   getProductById(id: string): Observable<Product> {
-    return this.httpClient.get<Product[]>(environment.api_url + '/products/' + id, {}).pipe(
+    return this.httpClient.get<Product>(environment.api_url + '/products/' + id, {}).pipe(
       map((data: any) => data['product'])
     );
   }
