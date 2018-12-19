@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
-import { Product } from '../../models/product.model';
-import { ProductsService } from '../../services/products.service';
+import { Product } from '../../models';
+import { ProductsService } from '../../services';
 
 @Component({
   selector: 'app-we-recommend',
@@ -39,7 +39,7 @@ export class WeRecommendComponent implements OnInit {
 
     this.animationContinues = true;
 
-    const timer: number = setInterval(() => {
+    const timer: any = setInterval(() => {
 
       if (direction === -1) {
         if (this.position >= position + shift) {
