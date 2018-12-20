@@ -10,6 +10,7 @@ import { AddCategoryComponent, AdminAddProductComponent, AdminPageComponent } fr
 import { ProductComponent } from './components';
 import { WishlistPageComponent } from './components/wishlist-page/wishlist-page.component';
 import { StatisticsPageComponent, CheckoutPageComponent } from './components/';
+import { CartComponent } from './components';
 
 const childAdminRouts: Routes = [
   { path: '', redirectTo: 'statistics', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminPageComponent, children: childAdminRouts },
   { path: 'wishes', component: WishlistPageComponent, canActivate: [ AuthGuard ] },
   { path: 'checkout', component: CheckoutPageComponent, canActivate: [ AuthGuard ] },
+  { path: 'cart', component: CartComponent, canActivate: [ AuthGuard ] }
 ];
 
 @NgModule({

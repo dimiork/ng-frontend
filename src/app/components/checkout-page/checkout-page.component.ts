@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CartService } from '../../services/cart.service';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 import { Order } from '../../models/order';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-checkout-page',
@@ -14,6 +16,7 @@ export class CheckoutPageComponent implements OnInit {
   submitted: boolean = false;
 
   order: Order = null;
+  user: User = null;
 
   objectKeys: any = Object.keys;
 
@@ -33,7 +36,15 @@ export class CheckoutPageComponent implements OnInit {
     return !!(this.submitted && this.formControls.expiration.errors);
   }
 
-  constructor(private formBuilder: FormBuilder, private cartService: CartService) {/**/}
+  constructor(
+    private formBuilder: FormBuilder,
+    private cartService: CartService,
+    private authorizationService: AuthorizationService
+    ) {
+
+    this.authorizationService.getUser()
+    .subscribe( (resp: User) => this.user = resp);
+  }
 
   ngOnInit(): void {
     this.checkoutForm = this.formBuilder.group({
@@ -42,7 +53,7 @@ export class CheckoutPageComponent implements OnInit {
       expiration: ['', Validators.required],
     });
 
-    this.cartService.getOrder().subscribe(
+    this.cartService.getOrder(this.user).subscribe(
       (order: Order) => {
         this.order = order;
       },
@@ -58,9 +69,9 @@ export class CheckoutPageComponent implements OnInit {
       return;
     }
 
-    this.cartService.createOrder(this.order).subscribe(
-      (next: any) => {/**/},
-      (err: any) => {/**/}
-    );
+    // this.cartService.createOrder(this.order).subscribe(
+    //   (next: any) => {/**/},
+    //   (err: any) => {/**/}
+    // );
   }
 }

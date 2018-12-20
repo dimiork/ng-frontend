@@ -2,7 +2,8 @@ import { Product } from './product.model';
 import { User } from './user';
 
 export class Order {
-  date: number;
+  id: null;
+  date: null;
   client: User;
   total: number;
   items: {
