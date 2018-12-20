@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { ProductsService } from '../../services/products.service';
 // import { OrderService } from '../../services/order.service';
 import { Product } from '../../models/product.model';
 import { WishlistService } from 'src/app/services/wishlist.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { CartService } from '../../services/cart.service';
 import { User } from 'src/app/models/user';
 import { Wishlist } from 'src/app/models/wishlist.model';
+import { Order } from 'src/app/models/order';
 
 @Component({
   selector: 'app-main-page',
@@ -33,6 +36,7 @@ export class MainPageComponent implements OnInit {
   user: User;
   productsList: Product[];
   updateWishlist: Wishlist;
+  order: Order;
 
   index: number = null;
 
@@ -40,6 +44,7 @@ export class MainPageComponent implements OnInit {
     private productsService: ProductsService,
     private wishlistService: WishlistService,
     private authorizationService: AuthorizationService,
+    private cartService: CartService,
     // private orderService: OrderService,
   ) {
     this.products$ = this.productsService.getAllProducts();
@@ -56,7 +61,18 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
 
     this.authorizationService.getUser()
-    .subscribe( (resp: User) => this.user = resp);
+    .pipe(
+      switchMap((user: User) => {
+        if (!!user) {
+          this.user = user;
+
+          return this.cartService.getOrder(user);
+        }
+      })
+      )
+    .subscribe( (order: Order) => {
+      this.order = order;
+    });
 
     this.wishlistService.getWishlistSubject()
       .subscribe((data: any) => this.productsList = data);
@@ -99,7 +115,19 @@ export class MainPageComponent implements OnInit {
   public onAddToCart(product: Product, evt: Event): void {
     if (evt && product) {
       evt.stopPropagation();
-      // this.orderService.createOrder(product);
+
+      if (!!this.order) {
+        this.cartService.updateOrder({ quantity: 1, product: product }, this.order, false)
+        .subscribe((res: any) => res);
+
+        return;
+      }
+
+      this.cartService.createOrder(
+        this.user,
+        { quantity: 1, product: product }
+        )
+      .subscribe((res: any) => res);
     }
   }
 

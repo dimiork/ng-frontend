@@ -26,6 +26,7 @@ import { NotificationService } from './services/';
 import { StatisticsPageComponent } from './components/';
 import { CheckoutPageComponent } from './components';
 import { WeRecommendComponent } from './components';
+import { CartComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { WeRecommendComponent } from './components';
     SpinnerComponent,
     StatisticsPageComponent,
     CheckoutPageComponent,
-    WeRecommendComponent
+    WeRecommendComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

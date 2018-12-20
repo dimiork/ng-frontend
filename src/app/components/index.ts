@@ -6,3 +6,4 @@ export * from './add-category/add-category.component';
 export { StatisticsPageComponent } from './statistics-page/statistics-page.component';
 export * from './checkout-page/checkout-page.component';
 export * from './we-recommend/we-recommend.component';
+export * from './cart/cart.component';
