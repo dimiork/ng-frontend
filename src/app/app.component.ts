@@ -14,8 +14,7 @@ import { User } from './models/user';
 })
 export class AppComponent {
   title: string = 'ng-frontend';
-  isReady: boolean;
-  // isReady: Observable<boolean>;
+  isReady$: Observable<boolean>;
 
   user: User;
   wishlist: any = {};
@@ -27,13 +26,12 @@ export class AppComponent {
     private notify: NotificationService
   ) {
 
-// <<<<<<< HEAD
-//     this.isReady = this.authService.isReady();
-// =======
-    this.authService.isReady().pipe(
-      tap((state: boolean) => {
-        this.isReady = state;
-      }),
+    this.isReady$ = this.authService.isReady();
+
+    this.authService.isAuthorized().pipe(
+      // tap((state: boolean) => {
+      //   this.isReady = state;
+      // }),
       filter((state: boolean) => !!state),
       take(1)
     ).subscribe((data: boolean) => {

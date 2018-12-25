@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import {Location} from '@angular/common';
 
-import { Observable } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
+import { map, share, catchError } from 'rxjs/operators';
 
+import { User } from '../models/user';
 import { AuthorizationService } from '../services/authorization.service';
 
 @Injectable({
@@ -11,40 +12,39 @@ import { AuthorizationService } from '../services/authorization.service';
 })
 export class AuthGuard implements CanActivate {
 
-  private hasAcces: boolean;
+  private hasAcces: Observable<boolean> | boolean;
   private startPath: string;
 
   constructor(
     private router: Router,
     private authService: AuthorizationService,
-    private location: Location,
     ) {
-
-    this.startPath = this.location.path();
-
-    this.authService.isAuthorized()
-    .subscribe((isPermitted: any) => {
-      if (!!isPermitted) {
-        this.router.navigate([this.startPath]);
-
-        this.hasAcces = true;
-
-        return;
-      }
-
-      this.router.navigate(['login']);
-
-      this.hasAcces = false;
-
+    this.authService.isAuthorized().subscribe((auth: boolean) => {
+      this.hasAcces = auth;
     });
   }
 
   canActivate(): Observable<boolean> | boolean {
+    if (!!this.hasAcces) {
 
-    if (!this.hasAcces) {
-      this.router.navigate(['login']);
+      return true;
     }
 
-    return this.hasAcces;
+    return this.authService.fetchUser().pipe(
+      map((user: User) => {
+        if (user) {
+
+          return true;
+        }
+        this.router.navigate(['login']);
+
+        return false;
+      }),
+      catchError((err: any) => {
+        this.router.navigate(['login']);
+
+        return throwError(err);
+      })
+    );
   }
 }

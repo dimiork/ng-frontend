@@ -21,11 +21,11 @@ const childAdminRouts: Routes = [
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full', canActivate: [ AuthGuard ] },
-  { path: 'products/:id', component: ProductComponent},
-  { path: 'wishlist', component: WishlistPageComponent },
+  { path: 'products/:id', component: ProductComponent, canActivate: [ AuthGuard ]},
+  { path: 'wishlist', component: WishlistPageComponent, canActivate: [ AuthGuard ] },
   { path: 'login', component: LoginComponent, canActivate: [DisableLoginGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [DisableLoginGuard] },
-  { path: 'admin', component: AdminPageComponent, children: childAdminRouts },
+  { path: 'admin', component: AdminPageComponent, children: childAdminRouts, canActivate: [ AuthGuard ] },
   { path: 'wishes', component: WishlistPageComponent, canActivate: [ AuthGuard ] },
   { path: 'checkout', component: CheckoutPageComponent, canActivate: [ AuthGuard ] },
 ];

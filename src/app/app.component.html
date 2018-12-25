@@ -1,6 +1,10 @@
-<div *ngIf="isReady">
-<!-- <div *ngIf="( isReady | async )"> -->
+<!-- <div> -->
+<!-- <div *ngIf="isReady"> -->
+<div *ngIf="(isReady$ | async) else preloader">
   <app-header [products]="products"></app-header>
 
   <router-outlet></router-outlet>
 </div>
+<ng-template #preloader>
+  <app-spinner></app-spinner>
+</ng-template>
