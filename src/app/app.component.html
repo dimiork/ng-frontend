@@ -1,5 +1,3 @@
-<!-- <div> -->
-<!-- <div *ngIf="isReady"> -->
 <div *ngIf="(isReady$ | async) else preloader">
   <app-header [products]="products"></app-header>
 

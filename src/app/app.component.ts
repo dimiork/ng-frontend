@@ -29,9 +29,6 @@ export class AppComponent {
     this.isReady$ = this.authService.isReady();
 
     this.authService.isAuthorized().pipe(
-      // tap((state: boolean) => {
-      //   this.isReady = state;
-      // }),
       filter((state: boolean) => !!state),
       take(1)
     ).subscribe((data: boolean) => {
