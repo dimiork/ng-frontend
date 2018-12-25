@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, ReplaySubject, throwError } from 'rxjs';
+import { catchError, tap, map, share } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { NotificationService } from '../services/notification.service';
@@ -13,7 +13,7 @@ import { User, Credentials, AuthorizationResponse } from '../models/';
 })
 export class AuthorizationService {
 
-  private user$: BehaviorSubject<User | null>;
+  public user$: ReplaySubject<User | null>;
   private ready$: BehaviorSubject<boolean>;
 
   constructor(
@@ -22,7 +22,7 @@ export class AuthorizationService {
   ) {
 
     this.ready$ = new BehaviorSubject<boolean>(false);
-    this.user$ = new BehaviorSubject<User | null>(null);
+    this.user$ = new ReplaySubject<User | null>(1);
 
   }
 
@@ -30,8 +30,6 @@ export class AuthorizationService {
   public isReady(): Observable<boolean> {
     if (!this.getToken()) {
       this.ready$.next(true);
-    } else {
-      this.fetchUser();
     }
 
     return this.ready$.asObservable();
@@ -53,17 +51,12 @@ export class AuthorizationService {
 
   public getUser(): Observable<User | null> {
 
-    if (!!this.getToken() && !this.user$.getValue()) {
-      this.fetchUser();
-    }
-
     return this.user$.asObservable();
   }
 
   private authResponseHandler(response: AuthorizationResponse): void {
     if (!!response.success) {
       this.saveToken(response.token);
-      this.getUser();
       this.notify.show('Action success.');
 
     }
@@ -97,22 +90,14 @@ export class AuthorizationService {
     );
   }
 
-  public fetchUser(): Promise<User> {
+  public fetchUser(): Observable<User> {
 
-    return new Promise((resolve: any, reject: any): Promise<User> => {
-      const response: Promise<User> = this.http.get<User>(`${ environment.api_url }/user`)
-        .toPromise()
-        .then((user: User) => {
-          if (user) {
-            this.ready$.next(true);
-            this.user$.next(user);
-          }
-
-          return user;
-        });
-
-      return response;
-    });
+    return this.http.get<User>(`${ environment.api_url }/user`).pipe(
+      tap((user: User) => {
+        this.ready$.next(true);
+        this.user$.next(user);
+      })
+    );
   }
 
   public logout (): void {
