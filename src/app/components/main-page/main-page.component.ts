@@ -165,7 +165,8 @@ export class MainPageComponent implements OnInit {
 
   }
 
-  addOrRemoveProduct(product: Product): any  {
+  addOrRemoveProduct(product: Product, event: Event): any  {
+    event.stopPropagation();
 
     if (!this.productsList) {
       return false;

@@ -25,7 +25,7 @@
     <mat-card class="product" *ngFor="let product of products$ | async" routerLink="products/{{product.id}}">
       <mat-card-header class="product__header">
 
-          <div (click)="addOrRemoveProduct(product)" class="heart">
+          <div (click)="addOrRemoveProduct(product, $event)" class="heart">
               <i *ngIf="isFavorite(product)" class="material-icons">
                 favorite
               </i>
@@ -43,7 +43,6 @@
         <p>{{ product.description }}</p>
       </mat-card-content>
       <mat-card-footer class="product__actions">
-        <button mat-raised-button color="primary" (click)="onAddToCart(product, $event)" class="product__button">Add to Cart</button>
         <button mat-raised-button color="primary" (click)="onAddToCart(product, $event)" class="product__button">Add to Cart</button>
       </mat-card-footer>
     </mat-card>

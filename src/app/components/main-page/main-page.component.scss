@@ -3,23 +3,36 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 2rem;
-  
 }
 
 .product {
-
-  min-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
   text-align: center;
+  transition: box-shadow .3s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 11px rgba(33,33,33,.2), 0 0 11px rgba(33,33,33,.2), 0 1px 3px 0 rgba(0,0,0,.12);
+  }
 
   &__header {
     padding: 1rem;
+    justify-content: center;
+    .heart {
+      i {
+        padding: 3px;
+        &:hover {
+          background: rgba(0, 0, 255, 0.1);
+          border-radius: 100%;
+        }
+      }
+    }
   }
 
   &__description {
     padding: 1rem;
+    margin: 0;
   }
 
   &__actions {
@@ -31,6 +44,9 @@
   }
 
   & img {
+    display: block;
+    margin: auto;
+    height: 300px;
     max-width: 100%;
     vertical-align: middle;
   }
