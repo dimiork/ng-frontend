@@ -48,6 +48,16 @@ mat-card-title {
   margin: auto;
 }
 
+.product-data-wrapper {
+  width: 100%;
+}
+
+.product-data-wrapper .description {
+  margin-top: 5px;
+}
+
 .items {
   padding-left: 10%;
+  max-height: 80px;
+  overflow: hidden;
 }
