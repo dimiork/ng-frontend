@@ -71,7 +71,9 @@ export class MainPageComponent implements OnInit {
       })
       )
     .subscribe( (order: Order) => {
-      this.order = order;
+      if (!!order.id) {
+        this.order = order;
+      }
     });
 
     this.wishlistService.getWishlistSubject()
@@ -117,8 +119,12 @@ export class MainPageComponent implements OnInit {
       evt.stopPropagation();
 
       if (!!this.order) {
+
         this.cartService.updateOrder({ quantity: 1, product: product }, this.order, false)
-        .subscribe((res: any) => res);
+        .subscribe((res: any) => {
+
+          return res;
+        });
 
         return;
       }
@@ -127,7 +133,9 @@ export class MainPageComponent implements OnInit {
         this.user,
         { quantity: 1, product: product }
         )
-      .subscribe((res: any) => res);
+      .subscribe((res: any) => {
+        this.order = res.order;
+      });
     }
   }
 

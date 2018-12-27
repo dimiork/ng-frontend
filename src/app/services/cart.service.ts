@@ -26,6 +26,7 @@ export class CartService {
     .pipe(
       map(
         (res: any) => {
+
           if (!!res.orders.length) {
 
             const currOrder: Order = this.filterOrders(client, res.orders)[0];
@@ -78,6 +79,8 @@ export class CartService {
     order_item: { quantity: number, product: Product }
     ): Observable<Order> {
 
+    const prodId: string = order_item.product.id;
+
     const body: any = {
       date: null,
       client: client,
@@ -90,6 +93,7 @@ export class CartService {
     return this.http.post(`${this.orderUrl}`, body)
     .pipe(
       map((res: any) => {
+        res.order.items[prodId].product.id = prodId;
 
         return res;
       })
@@ -97,7 +101,6 @@ export class CartService {
   }
 
   deleteProduct(order: Order, product: any): Order {
-
     delete order.items[product.product.id];
 
     return order;

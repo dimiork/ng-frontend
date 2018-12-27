@@ -16,13 +16,13 @@
         <button mat-button>
           <a routerLink="/wishlist" >
             {{ products.length }}
-            <i class="material-icons">favorite</i> 
+            <i class="material-icons">favorite</i>
           </a>
         </button>
       </span>
-  
+
       <span class="fill-remaining-space"></span>
-  
+
       <span>
         <span class="user-name" mat-button>{{ (user$ | async)?.login }}</span>
         <button mat-button>
@@ -30,15 +30,15 @@
         </button>
       </span>
     </mat-toolbar-row>
-  
+
   </mat-toolbar>
-  
+
   <mat-toolbar *ngIf="!(isAuthorized$ | async)" color="primary">
-  
+
       <mat-toolbar-row>
-  
+
         <span class="fill-remaining-space"></span>
-    
+
         <span>
           <button mat-button>
             <a [routerLink]="['', 'login']">login</a>
@@ -48,5 +48,5 @@
           </button>
         </span>
       </mat-toolbar-row>
-      
+
     </mat-toolbar>
